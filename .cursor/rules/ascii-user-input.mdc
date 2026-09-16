@@ -1,0 +1,18 @@
+---
+description: ASCII-only characters for user-facing / editable text
+alwaysApply: true
+---
+
+# ASCII for user input surfaces
+
+When producing strings users type, edit, paste, or match (ClickUp titles, CLI args, config values, prompts that define formats, docs showing those formats):
+
+- Use **keyboard ASCII only**: hyphen `-`, pipe `|`, quotes `"`, etc.
+- Do **not** use typographic Unicode: em/en dash (`—` `–`), fancy quotes (`“”` `‘’`), ellipsis (`…`), non-breaking space, etc.
+
+Examples:
+
+- People title: `SP1 - Kara Easlick` (not `SP1 — Kara Easlick`)
+- Stage labels in docs/seeds: `Stage 1 - Extract` (not em dash)
+
+Parsers may still **accept** legacy Unicode for backwards compatibility; **emit** and **document** ASCII only.

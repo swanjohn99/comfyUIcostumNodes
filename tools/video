@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# ffmpeg toolkit for video-gen prep. Usage: ./tools/video <subcommand> [args]
+# See tools/README.md. Requires ffmpeg + ffprobe on PATH.
+source "$(cd "$(dirname "$0")" && pwd)/_env.sh"
+exec "$PYTHON" "$ROOT/tools/video.py" "$@"

@@ -1,0 +1,21 @@
+---
+description: Short answers; no bulk code dumps in chat (all modes)
+alwaysApply: true
+---
+
+# Response style
+
+- Be brief. Bullets over paragraphs. No filler.
+- Answer the question directly; skip preamble and recap unless asked.
+
+# Chat content
+
+Applies in Ask, Plan, and Agent modes when talking to the user:
+
+- Prefer short identifiers and paths inline (backticks OK), e.g. `.venv/bin/python`.
+- Do not paste whole files, large snippets, config dumps, or diffs in chat.
+- After edits: say what changed and where; user reviews in the IDE.
+- Do not use fenced code blocks unless the user asks for a specific snippet or file contents.
+- Implement changes via tools; summarize outcomes without dumping file contents.
+
+Exception: show code only if the user explicitly asks for a specific snippet or file's contents.

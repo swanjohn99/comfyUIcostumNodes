@@ -1,0 +1,216 @@
+{
+  "trigger": "ohwx woman",
+  "lock": "The supplied reference image is the identity anchor. Photograph the same real person on another ordinary day.\n\nKeep the same face: bone structure, eyes, eyebrows, nose, lips, cheeks, jawline, chin, and natural asymmetries. Same apparent age, skin tone, pores, and small blemishes. Same body shape and proportions. Hair stays the same color and length; only the shot may change how it is worn. Makeup stays at the same everyday level. Skin is unretouched, with visible texture.\n\nRealistic anatomy, including hands and fingers. Ordinary snapshot: available light, natural color, mild photographic imperfections. The person looks like themselves, not a retouched model.\n\nFollow the shot for pose, camera, clothing, lighting, and place. Identity stays fixed.",
+  "shots": [
+    {
+      "id": "01",
+      "title": "Straight-on",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Camera at eye level. She faces the lens directly, head upright, eyes on camera, closed mouth, relaxed face. Tight head-and-shoulders crop. Soft daylight from a nearby window in a plain indoor room. Hair worn as in the reference. Light blue button-up shirt.",
+      "caption": "head and shoulders, facing camera, eye-level, neutral expression, light blue shirt, hair as reference, soft window light, indoor"
+    },
+    {
+      "id": "02",
+      "title": "Three-quarter left",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Head turned 30-40 degrees to her left, eyes still on camera, closed mouth. Tight head-and-shoulders. Overcast daylight through a window. Hair worn as in the reference. Charcoal crewneck sweater.",
+      "caption": "head and shoulders, three-quarter left, eyes on camera, charcoal sweater, overcast window light, indoor"
+    },
+    {
+      "id": "03",
+      "title": "Three-quarter right",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Head turned 30-40 degrees to her right, eyes on camera, a small natural smile. Tight head-and-shoulders. Warm indoor lamp light in the evening. Hair tucked behind one ear. White t-shirt.",
+      "caption": "head and shoulders, three-quarter right, subtle smile, white t-shirt, hair behind one ear, warm lamp light, indoor evening"
+    },
+    {
+      "id": "04",
+      "title": "Left profile",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. True left profile: camera at her left side so only the left eye and left ear are visible, nose in silhouette against the background. Neutral closed mouth. Head-and-shoulders. Soft outdoor shade. Hair worn as in the reference. Light blue button-up shirt.",
+      "caption": "true left profile, one eye visible, head and shoulders, light blue shirt, hair as reference, outdoor shade"
+    },
+    {
+      "id": "05",
+      "title": "Right profile",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. True right profile: camera at her right side so only the right eye and right ear are visible. Relaxed closed mouth. Tight portrait. Overcast outdoor light. Hair worn as in the reference. Olive zip jacket over a plain tee.",
+      "caption": "true right profile, one eye visible, head and shoulders, olive jacket, overcast outdoor"
+    },
+    {
+      "id": "06",
+      "title": "Low camera",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Camera sits below her eye line, looking slightly up at her face. She looks toward the camera. Calm closed mouth. Close portrait. Soft window light indoors. Hair worn as in the reference. Charcoal crewneck sweater.",
+      "caption": "close portrait, low camera looking up, charcoal sweater, window light, indoor"
+    },
+    {
+      "id": "07",
+      "title": "High camera",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Camera sits above her eye line, looking slightly down at her face. She looks toward the camera. Calm closed mouth. Close portrait. Indoor daylight. Hair loosely tied back at the nape. White t-shirt.",
+      "caption": "close portrait, high camera looking down, white t-shirt, hair tied back, indoor daylight"
+    },
+    {
+      "id": "08",
+      "title": "Natural smile",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Face mostly toward the camera, genuine relaxed smile with teeth slightly visible, eyes on camera. Head-and-shoulders. Open shade outdoors. Hair worn as in the reference. Light blue button-up shirt.",
+      "caption": "head and shoulders, natural smile, light blue shirt, outdoor open shade"
+    },
+    {
+      "id": "09",
+      "title": "Looking away",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Slight three-quarter face, eyes looking off to the side rather than at the camera. Relaxed closed mouth. Tight portrait. Indoor window light. Hair worn as in the reference. Navy hoodie.",
+      "caption": "three-quarter portrait, looking away, navy hoodie, window light, indoor"
+    },
+    {
+      "id": "10",
+      "title": "Laughing",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. She is laughing, mouth open, eyes crinkled. Tight head-and-shoulders. Outdoor daylight. Hair slightly windblown. Olive zip jacket.",
+      "caption": "head and shoulders, laughing, mouth open, olive jacket, windblown hair, outdoor daylight"
+    },
+    {
+      "id": "11",
+      "title": "Arms relaxed",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, standing, both arms hanging naturally at her sides. Body toward the camera, head slightly turned to it. Neutral face. Indoor daylight. White t-shirt and blue jeans.",
+      "caption": "waist-up, standing, arms at sides, white t-shirt, blue jeans, indoor daylight"
+    },
+    {
+      "id": "12",
+      "title": "Mid-speech",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, standing at a slight three-quarter angle. Mouth slightly open as if mid-sentence, eyes on camera. Indoor daylight. Hair worn as in the reference. Charcoal crewneck sweater.",
+      "caption": "waist-up, three-quarter, mid-speech, mouth slightly open, charcoal sweater, indoor daylight"
+    },
+    {
+      "id": "13",
+      "title": "Holding smartphone",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, standing, holding a smartphone naturally in one hand, other arm relaxed. Slight three-quarter body. Relaxed face. Indoor daylight. Light blue button-up shirt.",
+      "caption": "waist-up, holding smartphone, light blue shirt, indoor daylight"
+    },
+    {
+      "id": "14",
+      "title": "Holding coffee",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, standing in a kitchen, holding a simple mug. Small smile. Warm tungsten kitchen light in the evening. Hair tucked behind one ear. Navy hoodie.",
+      "caption": "waist-up, holding mug, navy hoodie, hair behind one ear, kitchen, warm tungsten evening"
+    },
+    {
+      "id": "15",
+      "title": "Arms crossed",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, arms crossed naturally, body angled, face toward the camera. Serious closed-mouth face. Overcast daylight by a window. Olive zip jacket.",
+      "caption": "waist-up, arms crossed, serious expression, olive jacket, overcast window light"
+    },
+    {
+      "id": "16",
+      "title": "Hand on hip",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, one hand resting on a hip, other arm relaxed. Slight three-quarter stance. Friendly face. Soft daylight. White t-shirt.",
+      "caption": "waist-up, hand on hip, white t-shirt, soft daylight"
+    },
+    {
+      "id": "17",
+      "title": "Seated",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Seated on a sofa, framed from the knees up. One arm on the armrest. Relaxed face. Home interior, soft window light. Hair loosely tied back at the nape. Charcoal crewneck sweater.",
+      "caption": "seated, knees-up, charcoal sweater, hair tied back, home interior, window light"
+    },
+    {
+      "id": "18",
+      "title": "Walking",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Mid-thigh up, walking toward the camera, arms swinging. Relaxed face. Sidewalk in harsh midday sun with hard shadows. Light blue button-up shirt and dark jeans.",
+      "caption": "mid-thigh up, walking toward camera, light blue shirt, dark jeans, harsh midday sun, sidewalk"
+    },
+    {
+      "id": "19",
+      "title": "Leaning",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Knees-up, casually leaning against an indoor wall, one shoulder on the wall. Friendly face. Indoor daylight. White t-shirt.",
+      "caption": "knees-up, leaning on wall, white t-shirt, indoor daylight"
+    },
+    {
+      "id": "20",
+      "title": "Backlit",
+      "aspect_ratio": "4:5",
+      "shot": "A photograph of the same woman as the reference. Waist-up, standing by a bright window behind her. Face still readable, hair rim-lit. Neutral face. Hair worn as in the reference. Navy hoodie.",
+      "caption": "waist-up, backlit window, rim light on hair, navy hoodie, indoor"
+    },
+    {
+      "id": "21",
+      "title": "Straight-on standing",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body, standing facing the camera, both feet visible, arms at her sides. Relaxed face. Quiet street, overcast daylight. White t-shirt, blue jeans, sneakers.",
+      "caption": "full body, standing front, white t-shirt, blue jeans, sneakers, overcast street"
+    },
+    {
+      "id": "22",
+      "title": "Three-quarter standing",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body at a 45-degree angle, face toward the camera, one leg slightly forward, both feet visible. Light blue button-up shirt and dark jeans. Soft daylight, simple outdoor background.",
+      "caption": "full body, three-quarter stand, light blue shirt, dark jeans, soft outdoor daylight"
+    },
+    {
+      "id": "23",
+      "title": "Sitting on steps",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body sitting on outdoor concrete steps, knees bent, feet visible, one forearm on a knee. Relaxed face looking at the camera. Overcast daylight. Charcoal crewneck sweater and black trousers.",
+      "caption": "full body, sitting on steps, charcoal sweater, black trousers, overcast outdoor"
+    },
+    {
+      "id": "24",
+      "title": "Walking sideways",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body walking left to right, body in side view, head turned slightly toward the camera. Natural arm swing, both feet visible. Olive zip jacket and dark jeans. Outdoor daylight.",
+      "caption": "full body, walking sideways, olive jacket, dark jeans, outdoor daylight"
+    },
+    {
+      "id": "25",
+      "title": "Sitting",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body sitting on a simple chair, legs and feet visible. One hand on a thigh. Neutral face. Indoor daylight. White t-shirt and blue jeans.",
+      "caption": "full body, sitting on chair, white t-shirt, blue jeans, indoor daylight"
+    },
+    {
+      "id": "26",
+      "title": "Evening indoor",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body standing in a living room at night, both feet visible, arms relaxed. Face toward the camera. Warm lamp light. Navy hoodie and gray sweatpants.",
+      "caption": "full body, standing indoor evening, navy hoodie, gray sweatpants, warm lamp light"
+    },
+    {
+      "id": "27",
+      "title": "One leg crossed",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body, one ankle crossed in front of the other, body turned 20-30 degrees, face toward the camera, feet visible. Soft daylight on a park path. Light blue button-up shirt and dark jeans.",
+      "caption": "full body, standing, one leg crossed, light blue shirt, dark jeans, park path, soft daylight"
+    },
+    {
+      "id": "28",
+      "title": "Looking over shoulder",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body, body turned away, looking back over one shoulder at the camera, feet visible. Outdoor daylight. Hair worn as in the reference. Olive zip jacket and dark jeans.",
+      "caption": "full body, looking over shoulder, olive jacket, dark jeans, outdoor daylight"
+    },
+    {
+      "id": "29",
+      "title": "Casual outdoor stance",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body standing outdoors, relaxed stance, feet visible, subtle smile at the camera. Harsh sunlight. White t-shirt and blue jeans.",
+      "caption": "full body, standing outdoors, subtle smile, white t-shirt, blue jeans, harsh sun"
+    },
+    {
+      "id": "30",
+      "title": "Natural candid moment",
+      "aspect_ratio": "9:16",
+      "shot": "A photograph of the same woman as the reference. Full body candid, taking a step, looking slightly away, spontaneous face, both feet visible. Everyday sidewalk, overcast daylight. Hair slightly windblown. Charcoal crewneck sweater and black trousers. Ordinary snapshot.",
+      "caption": "full body, candid, looking away, charcoal sweater, windblown hair, overcast sidewalk, snapshot"
+    }
+  ]
+}

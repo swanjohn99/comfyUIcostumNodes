@@ -1,0 +1,6 @@
+httpx>=0.27
+python-dotenv>=1.0
+pillow>=10.0
+numpy>=1.26
+# optional: `./tools/prep … --smart` subject-aware cropping (needs yolov8n.pt in repo root)
+# ultralytics>=8.3
