@@ -4,8 +4,8 @@ Save and load ComfyUI `MASK` tensors as `.pt` files (exact float values).
 
 Nodes (category `mask_io`):
 
-- **Save Mask Tensor** - write `MASK` to `output/masks/{prefix}_{#####}.pt`, pass-through
-- **Load Mask Tensor** - read a `.pt` back as `MASK` `[B,H,W]`
+- **Save Mask Tensor** - write `MASK` to `output/masks/{prefix}_{#####}.pt`, pass-through; **download** button saves last `.pt` to the browser machine
+- **Load Mask Tensor** - read a `.pt` back as `MASK` `[B,H,W]`; **download** button saves the selected file locally
 
 ## Install
 

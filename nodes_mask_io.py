@@ -5,9 +5,13 @@ import folder_paths
 import torch
 
 
+def _clean_subfolder(subfolder: str = "masks") -> str:
+    return (subfolder or "masks").strip().strip("/\\") or "masks"
+
+
 def _masks_dir(subfolder: str = "masks") -> Path:
     root = Path(folder_paths.get_output_directory())
-    path = root / (subfolder.strip().strip("/\\") or "masks")
+    path = root / _clean_subfolder(subfolder)
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -57,7 +61,8 @@ class SaveMaskTensor:
 
     def save(self, masks, filename_prefix: str, subfolder: str):
         mask = _normalize_mask(masks).cpu()
-        out_dir = _masks_dir(subfolder)
+        sub = _clean_subfolder(subfolder)
+        out_dir = _masks_dir(sub)
         prefix = (filename_prefix or "sam3_masks").strip() or "sam3_masks"
         # Sanitize path separators in prefix
         prefix = prefix.replace("/", "_").replace("\\", "_")
@@ -75,7 +80,18 @@ class SaveMaskTensor:
         path = out_dir / f"{prefix}_{counter:05d}.pt"
         torch.save(mask, path)
         print(f"[mask_io] Saved MASK {tuple(mask.shape)} -> {path}")
-        return (mask,)
+        return {
+            "ui": {
+                "mask_files": [
+                    {
+                        "filename": path.name,
+                        "subfolder": sub,
+                        "type": "output",
+                    }
+                ]
+            },
+            "result": (mask,),
+        }
 
 
 class LoadMaskTensor:
