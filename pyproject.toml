@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-mask-tensor-io"
+description = "Save and load ComfyUI MASK tensors as .pt files"
+version = "1.0.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/swanjohn99/comfyUIcostumNodes"
+"Bug Tracker" = "https://github.com/swanjohn99/comfyUIcostumNodes/issues"
+
+[tool.comfy]
+PublisherId = "swanjohn99"
+DisplayName = "Mask Tensor I/O"

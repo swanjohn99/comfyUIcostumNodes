@@ -1,0 +1,6 @@
+# Keep registry package lean (tracked git files still excluded from publish archive)
+.cursor/
+.github/
+data/
+*.md
+!README.md

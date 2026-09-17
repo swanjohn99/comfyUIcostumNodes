@@ -16,6 +16,12 @@ git clone <this-repo-url>
 
 Restart ComfyUI. No pip install; uses Comfy's `torch` and `folder_paths`.
 
+### Comfy Registry / Manager
+
+1. Create a publisher + API key at https://registry.comfy.org (set `PublisherId` in `pyproject.toml` if different from `swanjohn99`).
+2. Publish: `comfy node publish`
+3. Install from ComfyUI Manager, or search the registry.
+
 ## Usage
 
 1. Wire `SAM3_TrackToMask` `masks` into **Save Mask Tensor**, then into your mask consumers.
