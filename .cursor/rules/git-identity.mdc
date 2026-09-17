@@ -1,0 +1,28 @@
+---
+description: Git author identity for this repo (no git config)
+alwaysApply: true
+---
+
+# Git identity
+
+Do **not** run `git config` (local or global).
+
+Author for commits in this repo:
+
+- name / id: `swanjohn99`
+- email: `bora.india@gmail.com`
+
+Source of truth: [`.cursor/git-identity.sh`](.cursor/git-identity.sh)
+
+When committing, set author via env or one-shot `-c`:
+
+```bash
+. .cursor/git-identity.sh
+git commit -m "..."
+```
+
+or:
+
+```bash
+git -c user.name="swanjohn99" -c user.email="bora.india@gmail.com" commit -m "..."
+```
