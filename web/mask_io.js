@@ -10,25 +10,27 @@ function viewUrl({ filename, subfolder = "", type = "output" }) {
   return api.apiURL(`/view?${params.toString()}`);
 }
 
-function warn(detail) {
-  const toast = app.extensionManager?.toast;
-  if (toast?.add) {
-    toast.add({
-      severity: "warn",
-      summary: "mask_io",
-      detail,
-      life: 3000,
-    });
+function toast(detail, severity = "warn") {
+  const t = app.extensionManager?.toast;
+  if (t?.add) {
+    t.add({ severity, summary: "mask_io", detail, life: 3500 });
   } else {
-    console.warn(`[mask_io] ${detail}`);
+    console[severity === "error" ? "error" : "warn"](`[mask_io] ${detail}`);
   }
 }
 
+function widgetValue(node, name) {
+  const w = node.widgets?.find((x) => x.name === name);
+  return w?.value;
+}
+
+function cleanSubfolder(raw) {
+  const s = String(raw ?? "masks").replace(/^[/\\]+|[/\\]+$/g, "");
+  return s || "masks";
+}
+
 function downloadFile(info) {
-  if (!info?.filename) {
-    warn("No file to download. Run Save first (or pick a file on Load).");
-    return;
-  }
+  if (!info?.filename) return;
   const a = document.createElement("a");
   a.href = viewUrl(info);
   a.download = info.filename;
@@ -38,52 +40,222 @@ function downloadFile(info) {
   a.remove();
 }
 
-function widgetValue(node, name) {
-  const w = node.widgets?.find((x) => x.name === name);
-  return w?.value;
+function formatBytes(n) {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+  return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function formatTime(mtime) {
+  try {
+    return new Date(mtime * 1000).toLocaleString();
+  } catch {
+    return "";
+  }
+}
+
+async function fetchMaskList(subfolder) {
+  const params = new URLSearchParams({ subfolder });
+  const res = await api.fetchApi(`/mask_io/list?${params.toString()}`);
+  if (!res.ok) throw new Error(`list failed (${res.status})`);
+  return res.json();
+}
+
+async function deleteMasks(subfolder, filenames) {
+  const res = await api.fetchApi("/mask_io/delete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ subfolder, filenames }),
+  });
+  if (!res.ok) throw new Error(`delete failed (${res.status})`);
+  return res.json();
+}
+
+function ensureStyles() {
+  if (document.getElementById("mask-io-picker-styles")) return;
+  const style = document.createElement("style");
+  style.id = "mask-io-picker-styles";
+  style.textContent = `
+    .mask-io-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.55);
+      display: flex; align-items: center; justify-content: center;
+      font-family: system-ui, sans-serif;
+    }
+    .mask-io-dialog {
+      background: #222; color: #eee; border: 1px solid #555;
+      border-radius: 8px; width: min(520px, 92vw); max-height: 80vh;
+      display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    }
+    .mask-io-dialog h3 {
+      margin: 0; padding: 12px 14px; border-bottom: 1px solid #444; font-size: 14px;
+    }
+    .mask-io-list {
+      overflow: auto; padding: 8px 10px; flex: 1; min-height: 120px;
+    }
+    .mask-io-row {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 8px; align-items: center;
+      padding: 6px 4px; border-bottom: 1px solid #333; font-size: 12px;
+    }
+    .mask-io-row:last-child { border-bottom: none; }
+    .mask-io-meta { color: #999; font-size: 11px; }
+    .mask-io-empty { padding: 24px; text-align: center; color: #999; }
+    .mask-io-actions {
+      display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;
+      padding: 10px 12px; border-top: 1px solid #444;
+    }
+    .mask-io-actions button {
+      cursor: pointer; border: 1px solid #666; background: #333; color: #eee;
+      border-radius: 4px; padding: 6px 12px; font-size: 12px;
+    }
+    .mask-io-actions button:hover { background: #444; }
+    .mask-io-actions button.primary { background: #3a6; border-color: #4b7; }
+    .mask-io-actions button.danger { background: #633; border-color: #844; }
+    .mask-io-actions button:disabled { opacity: 0.45; cursor: default; }
+  `;
+  document.head.appendChild(style);
+}
+
+async function openMaskPicker(node) {
+  ensureStyles();
+  const subfolder = cleanSubfolder(widgetValue(node, "subfolder"));
+
+  let data;
+  try {
+    data = await fetchMaskList(subfolder);
+  } catch (e) {
+    toast(`Could not list masks: ${e.message}`, "error");
+    return;
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "mask-io-overlay";
+  overlay.innerHTML = `
+    <div class="mask-io-dialog" role="dialog" aria-label="Mask files">
+      <h3>Mask files — output/${subfolder}</h3>
+      <div class="mask-io-list"></div>
+      <div class="mask-io-actions">
+        <button type="button" data-act="refresh">Refresh</button>
+        <button type="button" data-act="close">Close</button>
+        <button type="button" class="danger" data-act="delete" disabled>Delete</button>
+        <button type="button" class="primary" data-act="download" disabled>Download</button>
+      </div>
+    </div>
+  `;
+
+  const listEl = overlay.querySelector(".mask-io-list");
+  const btnDelete = overlay.querySelector('[data-act="delete"]');
+  const btnDownload = overlay.querySelector('[data-act="download"]');
+  let files = data.files || [];
+
+  function selectedNames() {
+    return [...listEl.querySelectorAll('input[type="checkbox"]:checked')].map(
+      (el) => el.value
+    );
+  }
+
+  function syncButtons() {
+    const n = selectedNames().length;
+    btnDelete.disabled = n === 0;
+    btnDownload.disabled = n === 0;
+  }
+
+  function render() {
+    listEl.replaceChildren();
+    if (!files.length) {
+      const empty = document.createElement("div");
+      empty.className = "mask-io-empty";
+      empty.textContent = `No .pt files in output/${subfolder}`;
+      listEl.appendChild(empty);
+      syncButtons();
+      return;
+    }
+    for (const f of files) {
+      const label = document.createElement("label");
+      label.className = "mask-io-row";
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.value = f.filename;
+      cb.addEventListener("change", syncButtons);
+      const span = document.createElement("span");
+      const name = document.createElement("div");
+      name.textContent = f.filename;
+      const meta = document.createElement("div");
+      meta.className = "mask-io-meta";
+      meta.textContent = `${formatBytes(f.size || 0)} · ${formatTime(f.mtime)}`;
+      span.append(name, meta);
+      label.append(cb, span);
+      listEl.appendChild(label);
+    }
+    syncButtons();
+  }
+
+  function close() {
+    overlay.remove();
+  }
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+
+  overlay.querySelector('[data-act="close"]').onclick = close;
+
+  overlay.querySelector('[data-act="refresh"]').onclick = async () => {
+    try {
+      data = await fetchMaskList(subfolder);
+      files = data.files || [];
+      render();
+    } catch (e) {
+      toast(`Refresh failed: ${e.message}`, "error");
+    }
+  };
+
+  btnDownload.onclick = () => {
+    const names = selectedNames();
+    if (!names.length) return;
+    for (const filename of names) {
+      downloadFile({ filename, subfolder, type: "output" });
+    }
+    toast(`Downloading ${names.length} file(s)`, "success");
+  };
+
+  btnDelete.onclick = async () => {
+    const names = selectedNames();
+    if (!names.length) return;
+    if (!confirm(`Delete ${names.length} file(s) from output/${subfolder}?`)) return;
+    try {
+      const result = await deleteMasks(subfolder, names);
+      const n = (result.deleted || []).length;
+      toast(`Deleted ${n} file(s)`, n ? "success" : "warn");
+      data = await fetchMaskList(subfolder);
+      files = data.files || [];
+      render();
+    } catch (e) {
+      toast(`Delete failed: ${e.message}`, "error");
+    }
+  };
+
+  document.body.appendChild(overlay);
+  render();
+}
+
+function addDownloadButton(nodeType) {
+  const onNodeCreated = nodeType.prototype.onNodeCreated;
+  nodeType.prototype.onNodeCreated = function () {
+    const r = onNodeCreated?.apply(this, arguments);
+    this.addWidget("button", "download", "download", () => {
+      openMaskPicker(this);
+    });
+    return r;
+  };
 }
 
 app.registerExtension({
   name: "mask_io.download",
   async beforeRegisterNodeDef(nodeType, nodeData) {
-    if (nodeData.name === "SaveMaskTensor") {
-      const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = function () {
-        const r = onNodeCreated?.apply(this, arguments);
-        this._mask_io_last = null;
-        this.addWidget("button", "download", "download", () => {
-          downloadFile(this._mask_io_last);
-        });
-        return r;
-      };
-
-      const onExecuted = nodeType.prototype.onExecuted;
-      nodeType.prototype.onExecuted = function (message) {
-        onExecuted?.apply(this, arguments);
-        const files = message?.mask_files;
-        this._mask_io_last = Array.isArray(files) ? files[0] : null;
-      };
-    }
-
-    if (nodeData.name === "LoadMaskTensor") {
-      const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = function () {
-        const r = onNodeCreated?.apply(this, arguments);
-        this.addWidget("button", "download", "download", () => {
-          const filename = widgetValue(this, "mask_file");
-          const subfolder = widgetValue(this, "subfolder") || "masks";
-          if (!filename || filename === "(none)") {
-            downloadFile(null);
-            return;
-          }
-          downloadFile({
-            filename,
-            subfolder: String(subfolder).replace(/^[/\\]+|[/\\]+$/g, "") || "masks",
-            type: "output",
-          });
-        });
-        return r;
-      };
+    if (nodeData.name === "SaveMaskTensor" || nodeData.name === "LoadMaskTensor") {
+      addDownloadButton(nodeType);
     }
   },
 });

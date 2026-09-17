@@ -1,4 +1,7 @@
 from .nodes_mask_io import LoadMaskTensor, SaveMaskTensor
+from .routes_mask_io import register_routes
+
+register_routes()
 
 NODE_CLASS_MAPPINGS = {
     "SaveMaskTensor": SaveMaskTensor,

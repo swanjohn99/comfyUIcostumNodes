@@ -45,6 +45,13 @@ class SaveMaskTensor:
 
     @classmethod
     def INPUT_TYPES(cls):
+        # Retry route registration if PromptServer was not ready at import.
+        try:
+            from .routes_mask_io import register_routes
+
+            register_routes()
+        except Exception:
+            pass
         return {
             "required": {
                 "masks": ("MASK",),
@@ -99,6 +106,12 @@ class LoadMaskTensor:
 
     @classmethod
     def INPUT_TYPES(cls):
+        try:
+            from .routes_mask_io import register_routes
+
+            register_routes()
+        except Exception:
+            pass
         return {
             "required": {
                 "mask_file": (_list_mask_files(),),
