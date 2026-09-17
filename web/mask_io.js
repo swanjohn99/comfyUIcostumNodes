@@ -19,9 +19,12 @@ function toast(detail, severity = "warn") {
   }
 }
 
+function widgetByName(node, name) {
+  return node.widgets?.find((x) => x.name === name);
+}
+
 function widgetValue(node, name) {
-  const w = node.widgets?.find((x) => x.name === name);
-  return w?.value;
+  return widgetByName(node, name)?.value;
 }
 
 function cleanSubfolder(raw) {
@@ -71,6 +74,21 @@ async function deleteMasks(subfolder, filenames) {
   return res.json();
 }
 
+function setMaskFileOnNode(node, filename) {
+  const w = widgetByName(node, "mask_file");
+  if (!w) return;
+  const values = w.options?.values;
+  if (Array.isArray(values)) {
+    const next = values.filter((v) => v !== "(none)" && v !== filename);
+    next.push(filename);
+    next.sort();
+    w.options.values = next;
+  }
+  w.value = filename;
+  w.callback?.(filename, undefined, node, undefined, undefined);
+  node.setDirtyCanvas?.(true, true);
+}
+
 function ensureStyles() {
   if (document.getElementById("mask-io-picker-styles")) return;
   const style = document.createElement("style");
@@ -97,6 +115,7 @@ function ensureStyles() {
       display: grid; grid-template-columns: auto 1fr auto;
       gap: 8px; align-items: center;
       padding: 6px 4px; border-bottom: 1px solid #333; font-size: 12px;
+      cursor: pointer;
     }
     .mask-io-row:last-child { border-bottom: none; }
     .mask-io-meta { color: #999; font-size: 11px; }
@@ -117,9 +136,14 @@ function ensureStyles() {
   document.head.appendChild(style);
 }
 
-async function openMaskPicker(node) {
+/**
+ * @param {object} node
+ * @param {"manage"|"select"} mode
+ */
+async function openMaskPicker(node, mode = "manage") {
   ensureStyles();
   const subfolder = cleanSubfolder(widgetValue(node, "subfolder"));
+  const selectMode = mode === "select";
 
   let data;
   try {
@@ -129,36 +153,52 @@ async function openMaskPicker(node) {
     return;
   }
 
+  const primaryLabel = selectMode ? "Select" : "Download";
+  const primaryAct = selectMode ? "select" : "download";
+
   const overlay = document.createElement("div");
   overlay.className = "mask-io-overlay";
   overlay.innerHTML = `
     <div class="mask-io-dialog" role="dialog" aria-label="Mask files">
-      <h3>Mask files — output/${subfolder}</h3>
+      <h3>Mask files - output/${subfolder}</h3>
       <div class="mask-io-list"></div>
       <div class="mask-io-actions">
         <button type="button" data-act="refresh">Refresh</button>
         <button type="button" data-act="close">Close</button>
-        <button type="button" class="danger" data-act="delete" disabled>Delete</button>
-        <button type="button" class="primary" data-act="download" disabled>Download</button>
+        ${
+          selectMode
+            ? ""
+            : `<button type="button" class="danger" data-act="delete" disabled>Delete</button>`
+        }
+        <button type="button" class="primary" data-act="${primaryAct}" disabled>${primaryLabel}</button>
       </div>
     </div>
   `;
 
   const listEl = overlay.querySelector(".mask-io-list");
   const btnDelete = overlay.querySelector('[data-act="delete"]');
-  const btnDownload = overlay.querySelector('[data-act="download"]');
+  const btnPrimary = overlay.querySelector(`[data-act="${primaryAct}"]`);
   let files = data.files || [];
+  const current = selectMode ? String(widgetValue(node, "mask_file") || "") : "";
+  const inputType = selectMode ? "radio" : "checkbox";
+  const inputName = selectMode ? "mask-io-pick" : undefined;
 
   function selectedNames() {
-    return [...listEl.querySelectorAll('input[type="checkbox"]:checked')].map(
+    return [...listEl.querySelectorAll(`input[type="${inputType}"]:checked`)].map(
       (el) => el.value
     );
   }
 
   function syncButtons() {
     const n = selectedNames().length;
-    btnDelete.disabled = n === 0;
-    btnDownload.disabled = n === 0;
+    if (btnDelete) btnDelete.disabled = n === 0;
+    btnPrimary.disabled = n === 0;
+  }
+
+  function applySelection(filename) {
+    setMaskFileOnNode(node, filename);
+    toast(`Selected ${filename}`, "success");
+    close();
   }
 
   function render() {
@@ -174,10 +214,15 @@ async function openMaskPicker(node) {
     for (const f of files) {
       const label = document.createElement("label");
       label.className = "mask-io-row";
-      const cb = document.createElement("input");
-      cb.type = "checkbox";
-      cb.value = f.filename;
-      cb.addEventListener("change", syncButtons);
+      const input = document.createElement("input");
+      input.type = inputType;
+      if (inputName) input.name = inputName;
+      input.value = f.filename;
+      if (selectMode && f.filename === current) input.checked = true;
+      input.addEventListener("change", syncButtons);
+      if (selectMode) {
+        label.addEventListener("dblclick", () => applySelection(f.filename));
+      }
       const span = document.createElement("span");
       const name = document.createElement("div");
       name.textContent = f.filename;
@@ -185,7 +230,7 @@ async function openMaskPicker(node) {
       meta.className = "mask-io-meta";
       meta.textContent = `${formatBytes(f.size || 0)} · ${formatTime(f.mtime)}`;
       span.append(name, meta);
-      label.append(cb, span);
+      label.append(input, span);
       listEl.appendChild(label);
     }
     syncButtons();
@@ -211,41 +256,49 @@ async function openMaskPicker(node) {
     }
   };
 
-  btnDownload.onclick = () => {
-    const names = selectedNames();
-    if (!names.length) return;
-    for (const filename of names) {
-      downloadFile({ filename, subfolder, type: "output" });
-    }
-    toast(`Downloading ${names.length} file(s)`, "success");
-  };
+  if (selectMode) {
+    btnPrimary.onclick = () => {
+      const names = selectedNames();
+      if (names.length !== 1) return;
+      applySelection(names[0]);
+    };
+  } else {
+    btnPrimary.onclick = () => {
+      const names = selectedNames();
+      if (!names.length) return;
+      for (const filename of names) {
+        downloadFile({ filename, subfolder, type: "output" });
+      }
+      toast(`Downloading ${names.length} file(s)`, "success");
+    };
 
-  btnDelete.onclick = async () => {
-    const names = selectedNames();
-    if (!names.length) return;
-    if (!confirm(`Delete ${names.length} file(s) from output/${subfolder}?`)) return;
-    try {
-      const result = await deleteMasks(subfolder, names);
-      const n = (result.deleted || []).length;
-      toast(`Deleted ${n} file(s)`, n ? "success" : "warn");
-      data = await fetchMaskList(subfolder);
-      files = data.files || [];
-      render();
-    } catch (e) {
-      toast(`Delete failed: ${e.message}`, "error");
-    }
-  };
+    btnDelete.onclick = async () => {
+      const names = selectedNames();
+      if (!names.length) return;
+      if (!confirm(`Delete ${names.length} file(s) from output/${subfolder}?`)) return;
+      try {
+        const result = await deleteMasks(subfolder, names);
+        const n = (result.deleted || []).length;
+        toast(`Deleted ${n} file(s)`, n ? "success" : "warn");
+        data = await fetchMaskList(subfolder);
+        files = data.files || [];
+        render();
+      } catch (e) {
+        toast(`Delete failed: ${e.message}`, "error");
+      }
+    };
+  }
 
   document.body.appendChild(overlay);
   render();
 }
 
-function addDownloadButton(nodeType) {
+function addPickerButton(nodeType, { label, mode }) {
   const onNodeCreated = nodeType.prototype.onNodeCreated;
   nodeType.prototype.onNodeCreated = function () {
     const r = onNodeCreated?.apply(this, arguments);
-    this.addWidget("button", "download", "download", () => {
-      openMaskPicker(this);
+    this.addWidget("button", label, label, () => {
+      openMaskPicker(this, mode);
     });
     return r;
   };
@@ -254,8 +307,10 @@ function addDownloadButton(nodeType) {
 app.registerExtension({
   name: "mask_io.download",
   async beforeRegisterNodeDef(nodeType, nodeData) {
-    if (nodeData.name === "SaveMaskTensor" || nodeData.name === "LoadMaskTensor") {
-      addDownloadButton(nodeType);
+    if (nodeData.name === "SaveMaskTensor") {
+      addPickerButton(nodeType, { label: "download", mode: "manage" });
+    } else if (nodeData.name === "LoadMaskTensor") {
+      addPickerButton(nodeType, { label: "select", mode: "select" });
     }
   },
 });
