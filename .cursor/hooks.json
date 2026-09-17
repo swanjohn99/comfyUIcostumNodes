@@ -3,7 +3,7 @@
   "hooks": {
     "afterFileEdit": [
       {
-        "command": ".cursor/hooks/commit-and-push.sh",
+        "command": "python .cursor/hooks/commit-and-push.py",
         "timeout": 120
       }
     ]

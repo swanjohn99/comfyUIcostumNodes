@@ -12,12 +12,24 @@ Author for commits in this repo:
 - name / id: `swanjohn99`
 - email: `bora.india@gmail.com`
 
-Source of truth: [`.cursor/git-identity.sh`](.cursor/git-identity.sh)
+Source of truth:
+
+- Unix: [`.cursor/git-identity.sh`](.cursor/git-identity.sh)
+- Windows: [`.cursor/git-identity.ps1`](.cursor/git-identity.ps1)
+
+Auto commit/push hook: `python .cursor/hooks/commit-and-push.py` (picks `.ps1` on Windows, `.sh` elsewhere).
 
 When committing, set author via env or one-shot `-c`:
 
 ```bash
 . .cursor/git-identity.sh
+git commit -m "..."
+```
+
+PowerShell:
+
+```powershell
+. .\.cursor\git-identity.ps1
 git commit -m "..."
 ```
 
