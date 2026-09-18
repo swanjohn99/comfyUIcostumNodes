@@ -89,9 +89,10 @@ class SaveMaskTensor:
         # Sanitize path separators in prefix
         prefix = prefix.replace("/", "_").replace("\\", "_")
 
-        existing = list(out_dir.glob(f"{prefix}_*.pt"))
         counters = []
-        for p in existing:
+        for p in _iter_mask_paths(out_dir):
+            if not p.is_file():
+                continue
             stem = p.stem  # prefix_00001
             if stem.startswith(prefix + "_"):
                 tail = stem[len(prefix) + 1 :]
@@ -99,7 +100,7 @@ class SaveMaskTensor:
                     counters.append(int(tail))
         counter = (max(counters) + 1) if counters else 1
 
-        path = out_dir / f"{prefix}_{counter:05d}.pt"
+        path = out_dir / f"{prefix}_{counter:05d}{MASK_EXTENSION}"
         torch.save(mask, path)
         print(f"[mask_io] Saved MASK {tuple(mask.shape)} -> {path}")
         return {
