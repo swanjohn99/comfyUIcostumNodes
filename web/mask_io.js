@@ -108,6 +108,11 @@ function ensureStyles() {
     .mask-io-dialog h3 {
       margin: 0; padding: 12px 14px; border-bottom: 1px solid #444; font-size: 14px;
     }
+    .mask-io-select-all {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-bottom: 1px solid #333;
+      font-size: 12px; cursor: pointer; user-select: none;
+    }
     .mask-io-list {
       overflow: auto; padding: 8px 10px; flex: 1; min-height: 120px;
     }

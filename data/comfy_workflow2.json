@@ -1,8 +1,8 @@
 {
   "id": "d0a50949-ff65-4208-ad43-4936440fc536",
   "revision": 0,
-  "last_node_id": 1310,
-  "last_link_id": 3152,
+  "last_node_id": 1311,
+  "last_link_id": 3153,
   "nodes": [
     {
       "id": 521,
@@ -422,7 +422,7 @@
         {
           "name": "latent_image",
           "type": "LATENT",
-          "link": 1252
+          "link": 3153
         }
       ],
       "outputs": [
@@ -648,215 +648,6 @@
       "widgets_values_named": {
         "shift_video": 12,
         "shift_audio": 1.5
-      }
-    },
-    {
-      "id": 528,
-      "type": "GetNode",
-      "pos": [
-        2139.5675878385746,
-        4656.284062701477
-      ],
-      "size": [
-        210,
-        34
-      ],
-      "flags": {
-        "collapsed": true
-      },
-      "order": 5,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            1236
-          ]
-        }
-      ],
-      "title": "Get_video vae",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
-      },
-      "widgets_values": [
-        "video vae"
-      ],
-      "widgets_values_named": {
-        "Constant": "video vae"
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 527,
-      "type": "GetNode",
-      "pos": [
-        2137.963256290805,
-        4676.932857979972
-      ],
-      "size": [
-        210,
-        34
-      ],
-      "flags": {
-        "collapsed": true
-      },
-      "order": 6,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            1237
-          ]
-        }
-      ],
-      "title": "Get_audio vae",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
-      },
-      "widgets_values": [
-        "audio vae"
-      ],
-      "widgets_values_named": {
-        "Constant": "audio vae"
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 529,
-      "type": "GetNode",
-      "pos": [
-        2157.985203220153,
-        4637.946557326513
-      ],
-      "size": [
-        210,
-        34
-      ],
-      "flags": {
-        "collapsed": true
-      },
-      "order": 7,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            1235
-          ]
-        }
-      ],
-      "title": "Get_audio",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
-      },
-      "widgets_values": [
-        "audio"
-      ],
-      "widgets_values_named": {
-        "Constant": "audio"
-      }
-    },
-    {
-      "id": 526,
-      "type": "NKDAVLatent",
-      "pos": [
-        2355.4717884987317,
-        4588.8245428261125
-      ],
-      "size": [
-        210,
-        255
-      ],
-      "flags": {},
-      "order": 54,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 1234
-        },
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 1235
-        },
-        {
-          "label": "video vae",
-          "name": "video_vae",
-          "type": "VAE",
-          "link": 1236
-        },
-        {
-          "label": "audio vae",
-          "name": "audio_vae",
-          "type": "VAE",
-          "link": 1237
-        },
-        {
-          "label": "latent mask",
-          "name": "latent_mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": 1238
-        },
-        {
-          "label": "audio mask",
-          "name": "audio_mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": null
-        },
-        {
-          "name": "fps",
-          "type": "FLOAT",
-          "widget": {
-            "name": "fps"
-          },
-          "link": 1239
-        }
-      ],
-      "outputs": [
-        {
-          "name": "latent",
-          "type": "LATENT",
-          "links": [
-            1252
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-nkd-basic-tools",
-        "ver": "0d4b054ad375ca037f27a64c7730699dc8278811",
-        "Node name for S&R": "NKDAVLatent",
-        "nkdSchema": 1,
-        "aux_id": "Nekodificador/ComfyUI-NKD-Basic-Tools"
-      },
-      "widgets_values": [
-        "keep",
-        24,
-        0,
-        0,
-        "cosine"
-      ],
-      "widgets_values_named": {
-        "audio_mode": "keep",
-        "fps": 24,
-        "ramp_ticks": 0,
-        "ramp_out_ticks": 0,
-        "ramp_shape": "cosine"
       }
     },
     {
@@ -1151,54 +942,54 @@
       ],
       "outputs": [
         {
-          "name": "source_fps🟨",
+          "name": "source_fps\ud83d\udfe8",
           "type": "FLOAT",
           "links": null
         },
         {
-          "name": "source_frame_count🟨",
+          "name": "source_frame_count\ud83d\udfe8",
           "type": "INT",
           "links": null
         },
         {
-          "name": "source_duration🟨",
+          "name": "source_duration\ud83d\udfe8",
           "type": "FLOAT",
           "links": null
         },
         {
-          "name": "source_width🟨",
+          "name": "source_width\ud83d\udfe8",
           "type": "INT",
           "links": null
         },
         {
-          "name": "source_height🟨",
+          "name": "source_height\ud83d\udfe8",
           "type": "INT",
           "links": null
         },
         {
-          "name": "loaded_fps🟦",
+          "name": "loaded_fps\ud83d\udfe6",
           "type": "FLOAT",
           "links": [
             1294
           ]
         },
         {
-          "name": "loaded_frame_count🟦",
+          "name": "loaded_frame_count\ud83d\udfe6",
           "type": "INT",
           "links": null
         },
         {
-          "name": "loaded_duration🟦",
+          "name": "loaded_duration\ud83d\udfe6",
           "type": "FLOAT",
           "links": null
         },
         {
-          "name": "loaded_width🟦",
+          "name": "loaded_width\ud83d\udfe6",
           "type": "INT",
           "links": null
         },
         {
-          "name": "loaded_height🟦",
+          "name": "loaded_height\ud83d\udfe6",
           "type": "INT",
           "links": null
         }
@@ -1240,7 +1031,7 @@
           "name": "model",
           "shape": 7,
           "type": "MODEL",
-          "link": 1276
+          "link": null
         }
       ],
       "outputs": [
@@ -1259,9 +1050,7 @@
         {
           "name": "latent_mask",
           "type": "MASK",
-          "links": [
-            1238
-          ]
+          "links": []
         }
       ],
       "properties": {
@@ -1669,8 +1458,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            1275,
-            1276
+            1275
           ]
         }
       ],
@@ -1867,46 +1655,6 @@
       "bgcolor": "#533"
     },
     {
-      "id": 534,
-      "type": "GetNode",
-      "pos": [
-        2223.783174369741,
-        4762.583482934949
-      ],
-      "size": [
-        210,
-        34
-      ],
-      "flags": {
-        "collapsed": true
-      },
-      "order": 16,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "FLOAT",
-          "type": "FLOAT",
-          "links": [
-            1239
-          ]
-        }
-      ],
-      "title": "Get_fps",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
-      },
-      "widgets_values": [
-        "fps"
-      ],
-      "widgets_values_named": {
-        "Constant": "fps"
-      },
-      "color": "#232",
-      "bgcolor": "#353"
-    },
-    {
       "id": 535,
       "type": "SetNode",
       "pos": [
@@ -1982,8 +1730,7 @@
           "name": "cropped_images",
           "type": "IMAGE",
           "links": [
-            1210,
-            1234
+            1210
           ]
         },
         {
@@ -2506,10 +2253,10 @@
       "title": "Note -  BiRefNet Download it",
       "properties": {},
       "widgets_values": [
-        "https://huggingface.co/Comfy-Org/BiRefNet/blob/main/background_removal/birefnet.safetensors\n\nPlace it in side \nmodels/\n    └── 📂 background_removal/"
+        "https://huggingface.co/Comfy-Org/BiRefNet/blob/main/background_removal/birefnet.safetensors\n\nPlace it in side \nmodels/\n    \u2514\u2500\u2500 \ud83d\udcc2 background_removal/"
       ],
       "widgets_values_named": {
-        "text": "https://huggingface.co/Comfy-Org/BiRefNet/blob/main/background_removal/birefnet.safetensors\n\nPlace it in side \nmodels/\n    └── 📂 background_removal/"
+        "text": "https://huggingface.co/Comfy-Org/BiRefNet/blob/main/background_removal/birefnet.safetensors\n\nPlace it in side \nmodels/\n    \u2514\u2500\u2500 \ud83d\udcc2 background_removal/"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -2539,6 +2286,44 @@
       },
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 1311,
+      "type": "LoadH3AVLatent",
+      "pos": [
+        2355.4717884987317,
+        4588.8245428261125
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            3153
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "swanjohn99/comfyuicostumnodes",
+        "ver": "bd58eb458459596786f19a8857d847622d369af0",
+        "Node name for S&R": "LoadH3AVLatent"
+      },
+      "widgets_values": [
+        "(none)",
+        "latents/MiniMaxH3"
+      ],
+      "widgets_values_named": {
+        "latent_file": "(none)",
+        "subfolder": "latents/MiniMaxH3"
+      }
     }
   ],
   "links": [
@@ -2647,54 +2432,6 @@
       "SAM3_TRACK_DATA"
     ],
     [
-      1234,
-      511,
-      0,
-      526,
-      0,
-      "IMAGE"
-    ],
-    [
-      1235,
-      529,
-      0,
-      526,
-      1,
-      "AUDIO"
-    ],
-    [
-      1236,
-      528,
-      0,
-      526,
-      2,
-      "VAE"
-    ],
-    [
-      1237,
-      527,
-      0,
-      526,
-      3,
-      "VAE"
-    ],
-    [
-      1238,
-      508,
-      2,
-      526,
-      4,
-      "MASK"
-    ],
-    [
-      1239,
-      534,
-      0,
-      526,
-      6,
-      "FLOAT"
-    ],
-    [
       1241,
       510,
       0,
@@ -2749,14 +2486,6 @@
       536,
       3,
       "SIGMAS"
-    ],
-    [
-      1252,
-      526,
-      0,
-      536,
-      4,
-      "LATENT"
     ],
     [
       1253,
@@ -2844,14 +2573,6 @@
       0,
       506,
       0,
-      "MODEL"
-    ],
-    [
-      1276,
-      556,
-      0,
-      508,
-      2,
       "MODEL"
     ],
     [
@@ -2957,6 +2678,14 @@
       504,
       0,
       "IMAGE"
+    ],
+    [
+      3153,
+      1311,
+      0,
+      536,
+      4,
+      "LATENT"
     ]
   ],
   "groups": [
