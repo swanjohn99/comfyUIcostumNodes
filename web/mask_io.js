@@ -276,6 +276,15 @@ async function openMaskPicker(node, mode = "manage") {
 
   overlay.querySelector('[data-act="close"]').onclick = close;
 
+  if (selectAllEl) {
+    selectAllEl.addEventListener("change", () => {
+      selectAllChecked = selectAllEl.checked;
+      selectAllEl.indeterminate = false;
+      for (const input of fileInputs()) input.checked = selectAllChecked;
+      syncButtons();
+    });
+  }
+
   overlay.querySelector('[data-act="refresh"]').onclick = async () => {
     try {
       data = await fetchMaskList(subfolder);
