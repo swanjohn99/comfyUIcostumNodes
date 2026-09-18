@@ -16,7 +16,7 @@ _ROUTES_REGISTERED = False
 
 
 def _safe_mask_path(subfolder: str, filename: str) -> Path | None:
-    """Resolve filename under masks dir; reject traversal / non-.pt."""
+    """Resolve filename under masks dir; reject traversal / invalid extension."""
     if not filename or not isinstance(filename, str):
         return None
     # Reject any path separators in the provided name
