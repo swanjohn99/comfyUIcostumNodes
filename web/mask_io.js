@@ -188,23 +188,38 @@ async function openMaskPicker(node, mode = "manage") {
   `;
 
   const listEl = overlay.querySelector(".mask-io-list");
+  const selectAllEl = overlay.querySelector('[data-act="select-all"]');
+  const selectAllRow = overlay.querySelector(".mask-io-select-all");
   const btnDelete = overlay.querySelector('[data-act="delete"]');
   const btnPrimary = overlay.querySelector(`[data-act="${primaryAct}"]`);
   let files = data.files || [];
+  let selectAllChecked = false;
   const current = selectMode ? String(widgetValue(node, "mask_file") || "") : "";
   const inputType = selectMode ? "radio" : "checkbox";
   const inputName = selectMode ? "mask-io-pick" : undefined;
 
+  function fileInputs() {
+    return [...listEl.querySelectorAll(`input[type="${inputType}"]`)];
+  }
+
   function selectedNames() {
-    return [...listEl.querySelectorAll(`input[type="${inputType}"]:checked`)].map(
-      (el) => el.value
-    );
+    return fileInputs().filter((el) => el.checked).map((el) => el.value);
+  }
+
+  function syncSelectAll() {
+    if (!selectAllEl) return;
+    const inputs = fileInputs();
+    const n = inputs.filter((el) => el.checked).length;
+    selectAllEl.indeterminate = n > 0 && n < inputs.length;
+    selectAllEl.checked = inputs.length > 0 && n === inputs.length;
+    selectAllChecked = selectAllEl.checked;
   }
 
   function syncButtons() {
     const n = selectedNames().length;
     if (btnDelete) btnDelete.disabled = n === 0;
     btnPrimary.disabled = n === 0;
+    syncSelectAll();
   }
 
   function applySelection(filename) {
