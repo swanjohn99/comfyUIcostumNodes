@@ -435,7 +435,14 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "CheckpointLoaderSimple"
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "models": [
+          {
+            "name": "sam3.1_multiplex_fp16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors",
+            "directory": "checkpoints"
+          }
+        ]
       },
       "widgets_values": [
         "sam3.1_multiplex_fp16.safetensors"
@@ -1094,7 +1101,14 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoraLoaderModelOnly"
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "models": [
+          {
+            "name": "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
+            "url": "https://huggingface.co/Kijai/MiniMax-H3_comfy/resolve/main/loras/minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
+            "directory": "loras"
+          }
+        ]
       },
       "widgets_values": [
         "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
