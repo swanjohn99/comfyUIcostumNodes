@@ -166,6 +166,13 @@ async function openMaskPicker(node, mode = "manage") {
   overlay.innerHTML = `
     <div class="mask-io-dialog" role="dialog" aria-label="Mask files">
       <h3>Mask files - output/${subfolder}</h3>
+      ${
+        selectMode
+          ? ""
+          : `<label class="mask-io-select-all" hidden>
+        <input type="checkbox" data-act="select-all"> Select All
+      </label>`
+      }
       <div class="mask-io-list"></div>
       <div class="mask-io-actions">
         <button type="button" data-act="refresh">Refresh</button>
