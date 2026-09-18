@@ -235,7 +235,7 @@ async function openMaskPicker(node, mode = "manage") {
       selectAllChecked = false;
       const empty = document.createElement("div");
       empty.className = "mask-io-empty";
-      empty.textContent = `No .pt files in output/${subfolder}`;
+      empty.textContent = `No mask files in output/${subfolder}`;
       listEl.appendChild(empty);
       syncButtons();
       return;
