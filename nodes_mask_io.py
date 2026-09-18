@@ -118,7 +118,7 @@ class SaveMaskTensor:
 
 
 class LoadMaskTensor:
-    """Load a previously saved MASK .pt file from output/masks."""
+    """Load a previously saved MASK .cmask (or legacy .pt) file from output/masks."""
 
     @classmethod
     def INPUT_TYPES(cls):
