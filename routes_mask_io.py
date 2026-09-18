@@ -1,4 +1,4 @@
-"""HTTP routes for listing/deleting saved mask .pt files."""
+"""HTTP routes for listing/deleting saved mask tensor files."""
 from __future__ import annotations
 
 from pathlib import Path

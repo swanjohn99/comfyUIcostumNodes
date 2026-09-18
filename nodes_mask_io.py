@@ -153,8 +153,13 @@ class LoadMaskTensor:
     def load(self, mask_file: str, subfolder: str):
         if not mask_file or mask_file == "(none)":
             raise FileNotFoundError(
-                f"No .pt mask files in output/{subfolder or 'masks'}. "
+                f"No mask files in output/{subfolder or 'masks'}. "
                 "Run Save Mask Tensor first."
+            )
+        if not _is_mask_filename(mask_file):
+            raise ValueError(
+                f"Unsupported mask file extension: {mask_file!r} "
+                f"(expected {MASK_EXTENSION} or legacy {LEGACY_MASK_EXTENSION})"
             )
         path = _masks_dir(subfolder) / mask_file
         if not path.is_file():
