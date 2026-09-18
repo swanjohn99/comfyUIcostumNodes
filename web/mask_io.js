@@ -321,6 +321,7 @@ async function openMaskPicker(node, mode = "manage") {
         toast(`Deleted ${n} file(s)`, n ? "success" : "warn");
         data = await fetchMaskList(subfolder);
         files = data.files || [];
+        selectAllChecked = false;
         render();
       } catch (e) {
         toast(`Delete failed: ${e.message}`, "error");
