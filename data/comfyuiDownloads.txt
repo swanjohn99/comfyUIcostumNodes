@@ -1,0 +1,46 @@
+ cd loras
+cd /workspace/runpod-slim/ComfyUI/models/loras
+wget https://huggingface.co/Kijai/MiniMax-H3_comfy/resolve/main/loras/minimax_h3_fl2v_lightx2v_turbo_8step_v1.0_resized_avg_rank_24_bf16.safetensors
+
+cd /workspace/runpod-slim/ComfyUI/models/loras
+wget https://huggingface.co/Kijai/MiniMax-H3_comfy/resolve/main/loras/minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors
+ 
+ 
+cd /workspace/runpod-slim/ComfyUI/models/checkpoints
+wget https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors
+
+cd vae
+wget https://huggingface.co/Comfy-Org/MiniMax-H3/blob/main/vae/minimax_h3_audio_vae_fp32.safetensors
+wget https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors
+
+cd diffusion_models
+wget https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors
+
+cd ..
+cd text_encoders
+wget https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors
+
+cd ..
+cd background_removal
+wget https://huggingface.co/Comfy-Org/BiRefNet/resolve/main/background_removal/birefnet.safetensors
+
+#gits
+cd /workspace/runpod-slim/ComfyUI/custom_nodes
+
+git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite
+cd ComfyUI-VideoHelperSuite/
+pip install -r requirements.txt
+
+git clone https://github.com/drozbay/MaskVidExperiments
+
+
+=====================
+custom 
+NKD Sigmas Curve
+NKD Basic Tools
+ComfyUI-VideoHelperSuite
+MaskVidExperiments
+
+----------------
+comfy publisher key
+pat-834ff7a2-d39c-43de-9c4c-dbf63bb86e22
