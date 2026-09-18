@@ -86,9 +86,6 @@ def _load_h3_latent(path: Path) -> dict[str, Any]:
 class SaveH3AVLatent:
     """Save MiniMax H3 AV latents to output/{subfolder}/*.h3latent."""
 
-    def __init__(self):
-        self.output_dir = folder_paths.get_output_directory()
-
     @classmethod
     def INPUT_TYPES(cls):
         try:
