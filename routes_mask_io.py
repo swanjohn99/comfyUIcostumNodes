@@ -23,7 +23,7 @@ def _safe_mask_path(subfolder: str, filename: str) -> Path | None:
     if "/" in filename or "\\" in filename:
         return None
     name = Path(filename).name
-    if name != filename or not name.endswith(".pt") or name.startswith("."):
+    if name != filename or not _is_mask_filename(name) or name.startswith("."):
         return None
     root = _masks_dir(subfolder).resolve()
     path = (root / name).resolve()
