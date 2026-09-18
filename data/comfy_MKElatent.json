@@ -1,0 +1,1452 @@
+{
+  "id": "d0a50949-ff65-4208-ad43-4936440fc536",
+  "revision": 0,
+  "last_node_id": 1309,
+  "last_link_id": 3154,
+  "nodes": [
+    {
+      "id": 504,
+      "type": "SetNode",
+      "pos": [
+        394.708685126036,
+        4612.892514672451
+      ],
+      "size": [
+        210,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 3152
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1220
+          ]
+        }
+      ],
+      "title": "Set_original video",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "original video"
+      },
+      "widgets_values": [
+        "original video"
+      ],
+      "widgets_values_named": {
+        "Constant": "original video"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 508,
+      "type": "NKDMaskOps",
+      "pos": [
+        1733.8629674254187,
+        4607.507418539522
+      ],
+      "size": [
+        210,
+        598
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 1211
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 1212
+        },
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 1276
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "mask_inverted",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "latent_mask",
+          "type": "MASK",
+          "links": [
+            1238
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-nkd-basic-tools",
+        "ver": "f08a8550cc7e1736501c4d378912a3549b30b19e",
+        "Node name for S&R": "NKDMaskOps",
+        "nkdSchema": 1,
+        "aux_id": "Nekodificador/ComfyUI-NKD-Basic-Tools"
+      },
+      "widgets_values": [
+        false,
+        0,
+        1,
+        2,
+        false,
+        0,
+        1,
+        0,
+        30,
+        0,
+        0.05,
+        0,
+        0,
+        1
+      ],
+      "widgets_values_named": {
+        "invert": false,
+        "black_point": 0,
+        "white_point": 1,
+        "despeckle": 2,
+        "fill_holes": false,
+        "close_gaps": 0,
+        "temporal_expand": 1,
+        "temporal_smooth": 0,
+        "expand": 30,
+        "blockify": 0,
+        "blockify_threshold": 0.05,
+        "feather": 0,
+        "edge_low": 0,
+        "edge_high": 1
+      }
+    },
+    {
+      "id": 509,
+      "type": "GetNode",
+      "pos": [
+        1531.0213410499457,
+        4655.100294227418
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1212
+          ]
+        }
+      ],
+      "title": "Get_video vae",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "video vae"
+      ],
+      "widgets_values_named": {
+        "Constant": "video vae"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 511,
+      "type": "MVEx_SubjectCrop",
+      "pos": [
+        1180.9174019261004,
+        4584.897912986291
+      ],
+      "size": [
+        230,
+        310
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "original_images",
+          "type": "IMAGE",
+          "link": 1220
+        },
+        {
+          "name": "masks",
+          "type": "MASK",
+          "link": 3153
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cropped_images",
+          "type": "IMAGE",
+          "links": [
+            1234
+          ]
+        },
+        {
+          "name": "cropped_masks",
+          "type": "MASK",
+          "links": [
+            1211
+          ]
+        },
+        {
+          "name": "bboxes",
+          "type": "BOUNDING_BOX",
+          "links": null
+        },
+        {
+          "name": "debug",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "maskvidexperiments",
+        "ver": "328cca9698accb5d135b182dfba0623af5ab3c43",
+        "Node name for S&R": "MVEx_SubjectCrop",
+        "aux_id": "drozbay/MaskVidExperiments"
+      },
+      "widgets_values": [
+        "tracked",
+        1.75,
+        "firm",
+        "stillness",
+        0,
+        false,
+        32,
+        0.3,
+        "auto"
+      ],
+      "widgets_values_named": {
+        "mode": "tracked",
+        "mode.crop_scale": 1.75,
+        "mode.padding": "firm",
+        "mode.prefer": "stillness",
+        "mode.aspect_ratio": 0,
+        "mode.seamless_loop": false,
+        "divisible_by": 32,
+        "upscale_megapixels": 0.3,
+        "resize_method": "auto"
+      }
+    },
+    {
+      "id": 515,
+      "type": "SetNode",
+      "pos": [
+        397.37173103446736,
+        4682.79144081635
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "link": 1291
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "title": "Set_audio",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "audio"
+      },
+      "widgets_values": [
+        "audio"
+      ],
+      "widgets_values_named": {
+        "Constant": "audio"
+      }
+    },
+    {
+      "id": 527,
+      "type": "GetNode",
+      "pos": [
+        2137.963256290805,
+        4676.932857979972
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1237
+          ]
+        }
+      ],
+      "title": "Get_audio vae",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "audio vae"
+      ],
+      "widgets_values_named": {
+        "Constant": "audio vae"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 528,
+      "type": "GetNode",
+      "pos": [
+        2139.5675878385746,
+        4656.284062701477
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1236
+          ]
+        }
+      ],
+      "title": "Get_video vae",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "video vae"
+      ],
+      "widgets_values_named": {
+        "Constant": "video vae"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 529,
+      "type": "GetNode",
+      "pos": [
+        2157.985203220153,
+        4637.946557326513
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            1235
+          ]
+        }
+      ],
+      "title": "Get_audio",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "audio"
+      ],
+      "widgets_values_named": {
+        "Constant": "audio"
+      }
+    },
+    {
+      "id": 534,
+      "type": "GetNode",
+      "pos": [
+        2223.783174369741,
+        4762.583482934949
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            1239
+          ]
+        }
+      ],
+      "title": "Get_fps",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "fps"
+      ],
+      "widgets_values_named": {
+        "Constant": "fps"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 535,
+      "type": "SetNode",
+      "pos": [
+        594.7884955612559,
+        4727.349692289025
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "link": 1294
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "title": "Set_fps",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "fps"
+      },
+      "widgets_values": [
+        "fps"
+      ],
+      "widgets_values_named": {
+        "Constant": "fps"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 551,
+      "type": "UNETLoader",
+      "pos": [
+        -166.4312274594607,
+        3672.5413666056743
+      ],
+      "size": [
+        516.7953873414365,
+        83.28326218239317
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1277
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "UNETLoader",
+        "models": [
+          {
+            "name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+            "directory": "diffusion_models"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 552,
+      "type": "ModelAttentionBackend",
+      "pos": [
+        419.24827587565164,
+        3673.6858584840807
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1277
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            1278
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.32.0",
+        "Node name for S&R": "ModelAttentionBackend"
+      },
+      "widgets_values": [
+        "comfy kitchen attention"
+      ],
+      "widgets_values_named": {
+        "attention": "comfy kitchen attention"
+      }
+    },
+    {
+      "id": 555,
+      "type": "VAELoader",
+      "pos": [
+        -149.06056687523133,
+        3959.801669972296
+      ],
+      "size": [
+        385,
+        90
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1274
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_audio_vae_fp32.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+      }
+    },
+    {
+      "id": 556,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        669.2998134092105,
+        3675.2091771742375
+      ],
+      "size": [
+        579.2231329949642,
+        82
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1278
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1276
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
+        0.5
+      ],
+      "widgets_values_named": {
+        "lora_name": "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
+        "strength_model": 0.5
+      }
+    },
+    {
+      "id": 564,
+      "type": "VHS_VideoInfo",
+      "pos": [
+        401.3556315590113,
+        4727.234912538606
+      ],
+      "size": [
+        234.931640625,
+        206
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 1293
+        }
+      ],
+      "outputs": [
+        {
+          "name": "source_fps🟨",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "source_frame_count🟨",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "source_duration🟨",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "source_width🟨",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "source_height🟨",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "loaded_fps🟦",
+          "type": "FLOAT",
+          "links": [
+            1294
+          ]
+        },
+        {
+          "name": "loaded_frame_count🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "loaded_duration🟦",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "loaded_width🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "loaded_height🟦",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "1.7.9",
+        "Node name for S&R": "VHS_VideoInfo"
+      },
+      "widgets_values": {}
+    },
+    {
+      "id": 1307,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        79.98404443758858,
+        4582.08178833076
+      ],
+      "size": [
+        270,
+        336
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 3151
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3152
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "35e5956193769d18a13136cdedb73a36a05c73e6",
+        "Node name for S&R": "ImageResizeKJv2"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "nearest-exact",
+        "resize",
+        "0, 0, 0",
+        "center",
+        32,
+        "cpu"
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1024,
+        "upscale_method": "nearest-exact",
+        "keep_proportion": "resize",
+        "pad_color": "0, 0, 0",
+        "crop_position": "center",
+        "divisible_by": 32,
+        "device": "cpu"
+      }
+    },
+    {
+      "id": 554,
+      "type": "VAELoader",
+      "pos": [
+        -149.06056687523133,
+        3829.8016699722943
+      ],
+      "size": [
+        385,
+        90
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1272
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_video_vae_fp16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+      }
+    },
+    {
+      "id": 513,
+      "type": "SetNode",
+      "pos": [
+        255.9090431309638,
+        3860.5678854952325
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "link": 1272
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null
+        }
+      ],
+      "title": "Set_video vae",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "video vae"
+      },
+      "widgets_values": [
+        "video vae"
+      ],
+      "widgets_values_named": {
+        "Constant": "video vae"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 512,
+      "type": "SetNode",
+      "pos": [
+        252.39586030716276,
+        3987.357355328988
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "link": 1274
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null
+        }
+      ],
+      "title": "Set_audio vae",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "audio vae"
+      },
+      "widgets_values": [
+        "audio vae"
+      ],
+      "widgets_values_named": {
+        "Constant": "audio vae"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 1308,
+      "type": "LoadMaskTensor",
+      "pos": [
+        765.826903385704,
+        4959.3318604647675
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "masks",
+          "type": "MASK",
+          "links": [
+            3153
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "swanjohn99/comfyuicostumnodes",
+        "ver": "bd58eb458459596786f19a8857d847622d369af0",
+        "Node name for S&R": "LoadMaskTensor"
+      },
+      "widgets_values": [
+        "sam3_masks_00001.pt",
+        "masks",
+        "select"
+      ],
+      "widgets_values_named": {
+        "mask_file": "sam3_masks_00001.pt",
+        "subfolder": "masks",
+        "select": "select"
+      }
+    },
+    {
+      "id": 1309,
+      "type": "SaveMiniMaxH3AVLatent",
+      "pos": [
+        2690.6332883103105,
+        4617.641433330612
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 3154
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveMiniMaxH3AVLatent",
+        "aux_id": "JerryZRic/comfyui-minimax-h3-latent"
+      },
+      "widgets_values": [
+        "latents/MiniMaxH3"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "latents/MiniMaxH3"
+      }
+    },
+    {
+      "id": 526,
+      "type": "NKDAVLatent",
+      "pos": [
+        2355.4717884987317,
+        4588.8245428261125
+      ],
+      "size": [
+        210,
+        255
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1234
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 1235
+        },
+        {
+          "label": "video vae",
+          "name": "video_vae",
+          "type": "VAE",
+          "link": 1236
+        },
+        {
+          "label": "audio vae",
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 1237
+        },
+        {
+          "label": "latent mask",
+          "name": "latent_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": 1238
+        },
+        {
+          "label": "audio mask",
+          "name": "audio_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 1239
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            3154
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-nkd-basic-tools",
+        "ver": "0d4b054ad375ca037f27a64c7730699dc8278811",
+        "Node name for S&R": "NKDAVLatent",
+        "nkdSchema": 1,
+        "aux_id": "Nekodificador/ComfyUI-NKD-Basic-Tools"
+      },
+      "widgets_values": [
+        "keep",
+        24,
+        0,
+        0,
+        "cosine"
+      ],
+      "widgets_values_named": {
+        "audio_mode": "keep",
+        "fps": 24,
+        "ramp_ticks": 0,
+        "ramp_out_ticks": 0,
+        "ramp_shape": "cosine"
+      }
+    },
+    {
+      "id": 563,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        -208.3484373693796,
+        4581.177940713124
+      ],
+      "size": [
+        255.8291015625,
+        456.68516329949574
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3151
+          ]
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            1291
+          ]
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": [
+            1293
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "1.7.9",
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "MemorableWindyKingsnake_20260915_210936.mp4",
+        "force_rate": 24,
+        "custom_width": 0,
+        "custom_height": 0,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "format": "AnimateDiff",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "MemorableWindyKingsnake_20260915_210936.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "force_rate": 24,
+            "custom_width": 0,
+            "custom_height": 0,
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "select_every_nth": 1
+          }
+        }
+      },
+      "widgets_values_named": {
+        "video": "MemorableWindyKingsnake_20260915_210936.mp4",
+        "force_rate": 24,
+        "custom_width": 0,
+        "custom_height": 0,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "format": "AnimateDiff",
+        "choose video to upload": null,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "MemorableWindyKingsnake_20260915_210936.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "force_rate": 24,
+            "custom_width": 0,
+            "custom_height": 0,
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "select_every_nth": 1
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      1211,
+      511,
+      1,
+      508,
+      0,
+      "MASK"
+    ],
+    [
+      1212,
+      509,
+      0,
+      508,
+      1,
+      "VAE"
+    ],
+    [
+      1220,
+      504,
+      0,
+      511,
+      0,
+      "IMAGE"
+    ],
+    [
+      1234,
+      511,
+      0,
+      526,
+      0,
+      "IMAGE"
+    ],
+    [
+      1235,
+      529,
+      0,
+      526,
+      1,
+      "AUDIO"
+    ],
+    [
+      1236,
+      528,
+      0,
+      526,
+      2,
+      "VAE"
+    ],
+    [
+      1237,
+      527,
+      0,
+      526,
+      3,
+      "VAE"
+    ],
+    [
+      1238,
+      508,
+      2,
+      526,
+      4,
+      "MASK"
+    ],
+    [
+      1239,
+      534,
+      0,
+      526,
+      6,
+      "FLOAT"
+    ],
+    [
+      1272,
+      554,
+      0,
+      513,
+      0,
+      "VAE"
+    ],
+    [
+      1274,
+      555,
+      0,
+      512,
+      0,
+      "VAE"
+    ],
+    [
+      1276,
+      556,
+      0,
+      508,
+      2,
+      "MODEL"
+    ],
+    [
+      1277,
+      551,
+      0,
+      552,
+      0,
+      "MODEL"
+    ],
+    [
+      1278,
+      552,
+      0,
+      556,
+      0,
+      "MODEL"
+    ],
+    [
+      1291,
+      563,
+      2,
+      515,
+      0,
+      "AUDIO"
+    ],
+    [
+      1293,
+      563,
+      3,
+      564,
+      0,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      1294,
+      564,
+      5,
+      535,
+      0,
+      "FLOAT"
+    ],
+    [
+      3151,
+      563,
+      0,
+      1307,
+      0,
+      "IMAGE"
+    ],
+    [
+      3152,
+      1307,
+      0,
+      504,
+      0,
+      "IMAGE"
+    ],
+    [
+      3153,
+      1308,
+      0,
+      511,
+      1,
+      "MASK"
+    ],
+    [
+      3154,
+      526,
+      0,
+      1309,
+      0,
+      "LATENT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7992049738102243,
+      "offset": [
+        286.98007098266044,
+        -4516.659629015368
+      ]
+    },
+    "frontendVersion": "1.52.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
