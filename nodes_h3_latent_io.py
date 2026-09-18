@@ -13,6 +13,8 @@ import safetensors.torch
 import torch
 from comfy.cli_args import args
 
+from .io_naming import output_path, resolve_output_stem
+
 DEFAULT_SUBFOLDER = "latents/MiniMaxH3"
 FORMAT_VERSION = 1
 EXTENSION = ".h3latent"

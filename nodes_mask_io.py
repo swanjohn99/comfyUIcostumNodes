@@ -4,6 +4,8 @@ from pathlib import Path
 import folder_paths
 import torch
 
+from .io_naming import output_path, resolve_output_stem
+
 # Avoid .pt — ComfyUI's missing-model scanner treats it as a model file.
 MASK_EXTENSION = ".cmask"
 LEGACY_MASK_EXTENSION = ".pt"
