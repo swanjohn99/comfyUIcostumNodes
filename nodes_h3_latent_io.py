@@ -103,6 +103,11 @@ class SaveH3AVLatent:
                 "filename_prefix": ("STRING", {"default": "MiniMaxH3"}),
                 "subfolder": ("STRING", {"default": DEFAULT_SUBFOLDER}),
             },
+            "optional": {
+                "basename": ("STRING", {"default": ""}),
+                "video_filename": ("STRING", {"default": ""}),
+                "timestamp": ("STRING", {"default": ""}),
+            },
             "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
         }
 
