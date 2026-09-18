@@ -53,7 +53,7 @@ def register_routes() -> bool:
         sub = _clean_subfolder(request.rel_url.query.get("subfolder", "masks"))
         d = _masks_dir(sub)
         files = []
-        for p in sorted(d.glob("*.pt")):
+        for p in sorted(_iter_mask_paths(d), key=lambda path: path.name):
             if not p.is_file():
                 continue
             st = p.stat()
