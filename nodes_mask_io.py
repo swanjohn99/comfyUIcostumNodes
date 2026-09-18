@@ -75,6 +75,11 @@ class SaveMaskTensor:
                 "filename_prefix": ("STRING", {"default": "sam3_masks"}),
                 "subfolder": ("STRING", {"default": "masks"}),
             },
+            "optional": {
+                "basename": ("STRING", {"default": ""}),
+                "video_filename": ("STRING", {"default": ""}),
+                "timestamp": ("STRING", {"default": ""}),
+            },
         }
 
     RETURN_TYPES = ("MASK",)

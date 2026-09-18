@@ -1,4 +1,5 @@
 from .nodes_h3_latent_io import LoadH3AVLatent, SaveH3AVLatent
+from .nodes_io_basename import BuildMediaIoBasename
 from .nodes_mask_io import LoadMaskTensor, SaveMaskTensor
 from .routes_h3_latent_io import register_routes as register_h3_latent_routes
 from .routes_mask_io import register_routes

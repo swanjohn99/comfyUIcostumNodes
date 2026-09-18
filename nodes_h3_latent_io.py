@@ -153,8 +153,8 @@ class SaveH3AVLatent:
         for index, tensor in enumerate(tensors):
             output[f"latent_{index}"] = tensor.detach().contiguous()
 
-        comfy.utils.save_torch_file(output, output_path, metadata=metadata)
-        print(f"[h3_latent_io] Saved H3 latent ({len(tensors)} member(s)) -> {output_path}")
+        comfy.utils.save_torch_file(output, output_path_str, metadata=metadata)
+        print(f"[h3_latent_io] Saved H3 latent ({len(tensors)} member(s)) -> {output_path_str}")
 
         return {
             "ui": {
