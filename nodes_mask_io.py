@@ -56,7 +56,7 @@ def _list_mask_files(subfolder: str = "masks") -> list[str]:
 
 
 class SaveMaskTensor:
-    """Save a ComfyUI MASK tensor to a .pt file under output/masks."""
+    """Save a ComfyUI MASK tensor to a .cmask file under output/masks."""
 
     @classmethod
     def INPUT_TYPES(cls):
