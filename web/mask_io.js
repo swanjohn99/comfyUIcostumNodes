@@ -230,7 +230,9 @@ async function openMaskPicker(node, mode = "manage") {
 
   function render() {
     listEl.replaceChildren();
+    if (selectAllRow) selectAllRow.hidden = !files.length;
     if (!files.length) {
+      selectAllChecked = false;
       const empty = document.createElement("div");
       empty.className = "mask-io-empty";
       empty.textContent = `No .pt files in output/${subfolder}`;
