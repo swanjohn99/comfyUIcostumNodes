@@ -88,26 +88,25 @@ class SaveMaskTensor:
     OUTPUT_NODE = True
     CATEGORY = "mask_io"
 
-    def save(self, masks, filename_prefix: str, subfolder: str):
+    def save(
+        self,
+        masks,
+        filename_prefix: str,
+        subfolder: str,
+        basename: str = "",
+        video_filename: str = "",
+        timestamp: str = "",
+    ):
         mask = _normalize_mask(masks).cpu()
         sub = _clean_subfolder(subfolder)
         out_dir = _masks_dir(sub)
-        prefix = (filename_prefix or "sam3_masks").strip() or "sam3_masks"
-        # Sanitize path separators in prefix
-        prefix = prefix.replace("/", "_").replace("\\", "_")
-
-        counters = []
-        for p in _iter_mask_paths(out_dir):
-            if not p.is_file():
-                continue
-            stem = p.stem  # prefix_00001
-            if stem.startswith(prefix + "_"):
-                tail = stem[len(prefix) + 1 :]
-                if tail.isdigit():
-                    counters.append(int(tail))
-        counter = (max(counters) + 1) if counters else 1
-
-        path = out_dir / f"{prefix}_{counter:05d}{MASK_EXTENSION}"
+        stem, fixed = resolve_output_stem(
+            basename=basename,
+            video_filename=video_filename,
+            timestamp=timestamp,
+            filename_prefix=filename_prefix or "sam3_masks",
+        )
+        path = output_path(out_dir, stem, fixed, MASK_EXTENSION)
         torch.save(mask, path)
         print(f"[mask_io] Saved MASK {tuple(mask.shape)} -> {path}")
         return {
