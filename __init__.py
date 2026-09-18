@@ -12,6 +12,7 @@ NODE_CLASS_MAPPINGS = {
     "LoadMaskTensor": LoadMaskTensor,
     "SaveH3AVLatent": SaveH3AVLatent,
     "LoadH3AVLatent": LoadH3AVLatent,
+    "BuildMediaIoBasename": BuildMediaIoBasename,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -19,6 +20,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LoadMaskTensor": "Load Mask Tensor",
     "SaveH3AVLatent": "Save MiniMax H3 AV Latent",
     "LoadH3AVLatent": "Load MiniMax H3 AV Latent",
+    "BuildMediaIoBasename": "Build Media IO Basename",
 }
 
 WEB_DIRECTORY = "./web"

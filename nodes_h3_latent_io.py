@@ -122,6 +122,9 @@ class SaveH3AVLatent:
         samples,
         filename_prefix: str = "MiniMaxH3",
         subfolder: str = DEFAULT_SUBFOLDER,
+        basename: str = "",
+        video_filename: str = "",
+        timestamp: str = "",
         prompt=None,
         extra_pnginfo=None,
     ):
@@ -130,14 +133,17 @@ class SaveH3AVLatent:
 
         tensors = _members(samples["samples"])
         sub = _clean_subfolder(subfolder)
-        prefix = (filename_prefix or "MiniMaxH3").strip() or "MiniMaxH3"
-        prefix = prefix.replace("\\", "/").strip("/")
-
-        full_output_folder, filename, counter, subfolder_result, _ = (
-            folder_paths.get_save_image_path(f"{sub}/{prefix}", self.output_dir)
+        out_dir = _latents_dir(sub)
+        stem, fixed = resolve_output_stem(
+            basename=basename,
+            video_filename=video_filename,
+            timestamp=timestamp,
+            filename_prefix=filename_prefix or "MiniMaxH3",
         )
-        output_filename = f"{filename}_{counter:05}_{EXTENSION}"
-        output_path = os.path.join(full_output_folder, output_filename)
+        path = output_path(out_dir, stem, fixed, EXTENSION)
+        output_filename = path.name
+        output_path_str = str(path)
+        subfolder_result = sub
 
         metadata = None
         if not args.disable_metadata:
