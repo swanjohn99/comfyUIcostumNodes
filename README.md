@@ -1,12 +1,14 @@
 # ComfyUI Mask Tensor I/O
 
-Save and load ComfyUI `MASK` tensors as `.pt` files (exact float values).
+Save and load ComfyUI `MASK` tensors as `.cmask` files (exact float values).
 
 Nodes (category `mask_io`):
 
-- **Save Mask Tensor** - write `MASK` to `output/masks/{prefix}_{#####}.pt`, pass-through
-- **Load Mask Tensor** - read a `.pt` back as `MASK` `[B,H,W]`
-- **download** (both nodes) - opens a picker of `output/{subfolder}/*.pt`; download and/or delete selected files (survives ComfyUI restart)
+- **Save Mask Tensor** - write `MASK` to `output/masks/{prefix}_{#####}.cmask`, pass-through
+- **Load Mask Tensor** - read a `.cmask` (or legacy `.pt`) back as `MASK` `[B,H,W]`
+- **download** (both nodes) - opens a picker of `output/{subfolder}/*.cmask`; download and/or delete selected files (survives ComfyUI restart)
+
+Legacy `.pt` mask files still load, but ComfyUI may false-flag them as missing models. Re-save with **Save Mask Tensor** and switch the workflow to the new `.cmask` file.
 
 ## Install
 

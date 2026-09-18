@@ -1,6 +1,6 @@
 [project]
-name = "comfyui-mask-tensor-io"
-description = "Save and load ComfyUI MASK tensors as .pt files"
+name = comfyui-mask-tensor-io""
+description = "Save and load ComfyUI MASK tensors as .cmask files"
 version = "1.0.0"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
