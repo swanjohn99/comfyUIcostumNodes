@@ -4,6 +4,11 @@ from pathlib import Path
 import folder_paths
 import torch
 
+# Avoid .pt — ComfyUI's missing-model scanner treats it as a model file.
+MASK_EXTENSION = ".cmask"
+LEGACY_MASK_EXTENSION = ".pt"
+MASK_EXTENSIONS = (MASK_EXTENSION, LEGACY_MASK_EXTENSION)
+
 
 def _clean_subfolder(subfolder: str = "masks") -> str:
     return (subfolder or "masks").strip().strip("/\\") or "masks"
