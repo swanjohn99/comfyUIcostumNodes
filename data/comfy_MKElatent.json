@@ -1027,14 +1027,14 @@
     },
     {
       "id": 1309,
-      "type": "SaveMiniMaxH3AVLatent",
+      "type": "SaveH3AVLatent",
       "pos": [
         2690.6332883103105,
         4617.641433330612
       ],
       "size": [
         270,
-        58
+        106
       ],
       "flags": {},
       "order": 22,
@@ -1054,14 +1054,17 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "SaveMiniMaxH3AVLatent",
-        "aux_id": "JerryZRic/comfyui-minimax-h3-latent"
+        "aux_id": "swanjohn99/comfyuicostumnodes",
+        "ver": "bd58eb458459596786f19a8857d847622d369af0",
+        "Node name for S&R": "SaveH3AVLatent"
       },
       "widgets_values": [
+        "MiniMaxH3",
         "latents/MiniMaxH3"
       ],
       "widgets_values_named": {
-        "filename_prefix": "latents/MiniMaxH3"
+        "filename_prefix": "MiniMaxH3",
+        "subfolder": "latents/MiniMaxH3"
       }
     },
     {
