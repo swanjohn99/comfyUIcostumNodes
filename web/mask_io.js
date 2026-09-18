@@ -248,6 +248,7 @@ async function openMaskPicker(node, mode = "manage") {
       if (inputName) input.name = inputName;
       input.value = f.filename;
       if (selectMode && f.filename === current) input.checked = true;
+      if (!selectMode && selectAllChecked) input.checked = true;
       input.addEventListener("change", syncButtons);
       if (selectMode) {
         label.addEventListener("dblclick", () => applySelection(f.filename));
