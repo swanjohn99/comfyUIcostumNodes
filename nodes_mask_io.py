@@ -39,9 +39,19 @@ def _normalize_mask(mask: torch.Tensor) -> torch.Tensor:
     return t.float().contiguous()
 
 
+def _is_mask_filename(name: str) -> bool:
+    lower = name.lower()
+    return any(lower.endswith(ext) for ext in MASK_EXTENSIONS)
+
+
+def _iter_mask_paths(directory: Path):
+    for ext in MASK_EXTENSIONS:
+        yield from directory.glob(f"*{ext}")
+
+
 def _list_mask_files(subfolder: str = "masks") -> list[str]:
     d = _masks_dir(subfolder)
-    files = sorted(p.name for p in d.glob("*.pt") if p.is_file())
+    files = sorted(p.name for p in _iter_mask_paths(d) if p.is_file())
     return files if files else ["(none)"]
 
 
