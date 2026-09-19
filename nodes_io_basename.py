@@ -1,7 +1,7 @@
 """Build a shared basename for mask/latent save nodes."""
 from __future__ import annotations
 
-from .io_naming import resolve_output_stem
+from .io_naming import resolve_save_stem
 
 
 class BuildMediaIoBasename:
