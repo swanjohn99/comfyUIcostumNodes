@@ -80,6 +80,7 @@ class SaveMaskTensor:
                 "video_filename": ("STRING", {"default": ""}),
                 "timestamp": ("STRING", {"default": ""}),
             },
+            "hidden": {"prompt": "PROMPT", "unique_id": "UNIQUE_ID"},
         }
 
     RETURN_TYPES = ("MASK",)
