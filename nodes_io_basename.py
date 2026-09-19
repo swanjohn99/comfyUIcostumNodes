@@ -31,10 +31,10 @@ class BuildMediaIoBasename:
         prompt=None,
         unique_id: str = "",
     ):
-        stem, _ = resolve_save_stem(
+        stem, fixed = resolve_save_stem(
             video_filename=video_filename,
             timestamp=timestamp,
             prompt=prompt,
             unique_id=unique_id,
         )
-        return (stem,)
+        return (stem if fixed else "",)
