@@ -105,7 +105,11 @@ class SaveH3AVLatent:
                 "video_filename": ("STRING", {"default": ""}),
                 "timestamp": ("STRING", {"default": ""}),
             },
-            "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
+            "hidden": {
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
+                "unique_id": "UNIQUE_ID",
+            },
         }
 
     RETURN_TYPES = ("LATENT",)

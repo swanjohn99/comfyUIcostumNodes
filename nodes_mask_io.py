@@ -97,15 +97,19 @@ class SaveMaskTensor:
         basename: str = "",
         video_filename: str = "",
         timestamp: str = "",
+        prompt=None,
+        unique_id: str = "",
     ):
         mask = _normalize_mask(masks).cpu()
         sub = _clean_subfolder(subfolder)
         out_dir = _masks_dir(sub)
-        stem, fixed = resolve_output_stem(
+        stem, fixed = resolve_save_stem(
             basename=basename,
             video_filename=video_filename,
             timestamp=timestamp,
             filename_prefix=filename_prefix or "sam3_masks",
+            prompt=prompt,
+            unique_id=unique_id,
         )
         path = output_path(out_dir, stem, fixed, MASK_EXTENSION)
         torch.save(mask, path)
