@@ -99,7 +99,15 @@ function videoFilenameFor(target) {
 function setWidget(node, name, value) {
   if (isInputLinked(node, name)) return false;
   const widget = widgetByName(node, name);
-  if (!widget || widget.value === value) return false;
+  if (!widget) return false;
+  const values = widget.options?.values;
+  if (Array.isArray(values)) {
+    const next = values.filter((v) => v !== "(none)" && v !== value);
+    next.push(value);
+    next.sort();
+    widget.options.values = next;
+  }
+  if (widget.value === value) return false;
   widget.value = value;
   widget.callback?.(value, undefined, node, undefined, undefined);
   node.setDirtyCanvas?.(true, true);
