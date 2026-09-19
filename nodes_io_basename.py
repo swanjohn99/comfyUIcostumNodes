@@ -24,9 +24,17 @@ class BuildMediaIoBasename:
     FUNCTION = "build"
     CATEGORY = "mask_io"
 
-    def build(self, video_filename: str, timestamp: str = ""):
-        stem, _ = resolve_output_stem(
+    def build(
+        self,
+        video_filename: str,
+        timestamp: str = "",
+        prompt=None,
+        unique_id: str = "",
+    ):
+        stem, _ = resolve_save_stem(
             video_filename=video_filename,
             timestamp=timestamp,
+            prompt=prompt,
+            unique_id=unique_id,
         )
         return (stem,)
