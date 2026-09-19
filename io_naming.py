@@ -4,8 +4,25 @@ from __future__ import annotations
 import re
 from datetime import datetime
 from pathlib import Path
+from weakref import WeakKeyDictionary
 
 _INVALID_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]+')
+_VIDEO_EXTS = frozenset(
+    {".mp4", ".webm", ".mov", ".mkv", ".avi", ".gif", ".m4v", ".mpeg", ".mpg"}
+)
+_VIDEO_INPUT_KEYS = ("video", "file", "video_path", "filename", "path")
+_VIDEO_LOAD_TYPES = frozenset(
+    {
+        "VHS_LoadVideo",
+        "VHS_LoadVideoPath",
+        "VHS_LoadVideoFFmpeg",
+        "VHS_LoadVideoFFmpegPath",
+        "LoadVideo",
+        "LoadVideoPath",
+        "LoadVideoUpload",
+    }
+)
+_PROMPT_TIMESTAMPS: WeakKeyDictionary = WeakKeyDictionary()
 
 
 def sanitize_stem(value: str) -> str:
