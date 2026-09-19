@@ -202,6 +202,9 @@ app.registerExtension({
   loadedGraphNode(node) {
     bindNode(node);
   },
+  async graphToPrompt() {
+    syncSaveNodes();
+  },
   async setup() {
     const orig = app.graph?.onNodeAdded;
     if (app.graph) {
