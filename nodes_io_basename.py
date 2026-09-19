@@ -16,6 +16,7 @@ class BuildMediaIoBasename:
             "optional": {
                 "timestamp": ("STRING", {"default": ""}),
             },
+            "hidden": {"prompt": "PROMPT", "unique_id": "UNIQUE_ID"},
         }
 
     RETURN_TYPES = ("STRING",)

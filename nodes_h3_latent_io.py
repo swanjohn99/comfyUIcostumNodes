@@ -128,6 +128,7 @@ class SaveH3AVLatent:
         timestamp: str = "",
         prompt=None,
         extra_pnginfo=None,
+        unique_id: str = "",
     ):
         if "samples" not in samples:
             raise KeyError('LATENT input missing "samples"')
@@ -135,11 +136,13 @@ class SaveH3AVLatent:
         tensors = _members(samples["samples"])
         sub = _clean_subfolder(subfolder)
         out_dir = _latents_dir(sub)
-        stem, fixed = resolve_output_stem(
+        stem, fixed = resolve_save_stem(
             basename=basename,
             video_filename=video_filename,
             timestamp=timestamp,
             filename_prefix=filename_prefix or "MiniMaxH3",
+            prompt=prompt,
+            unique_id=unique_id,
         )
         path = output_path(out_dir, stem, fixed, EXTENSION)
         output_filename = path.name
