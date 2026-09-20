@@ -143,16 +143,19 @@ class LoadMaskTensor:
             "required": {
                 "mask_file": (_list_mask_files(),),
                 "subfolder": ("STRING", {"default": "masks"}),
+                "skip_first_frames": ("INT", {"default": 0, "min": 0, "max": 1_000_000}),
+                "frame_load_cap": ("INT", {"default": 0, "min": 0, "max": 1_000_000}),
+                "select_every_nth": ("INT", {"default": 1, "min": 1, "max": 100}),
             },
         }
 
-    RETURN_TYPES = ("MASK",)
-    RETURN_NAMES = ("masks",)
+    RETURN_TYPES = ("MASK", "INT")
+    RETURN_NAMES = ("masks", "frame_count")
     FUNCTION = "load"
     CATEGORY = "mask_io"
 
     @classmethod
-    def IS_CHANGED(cls, mask_file, subfolder):
+    def IS_CHANGED(cls, mask_file, subfolder, **kwargs):
         if not mask_file or mask_file == "(none)":
             return float("nan")
         path = _masks_dir(subfolder) / mask_file
@@ -161,7 +164,14 @@ class LoadMaskTensor:
         except OSError:
             return float("nan")
 
-    def load(self, mask_file: str, subfolder: str):
+    def load(
+        self,
+        mask_file: str,
+        subfolder: str,
+        skip_first_frames: int = 0,
+        frame_load_cap: int = 0,
+        select_every_nth: int = 1,
+    ):
         if not mask_file or mask_file == "(none)":
             raise FileNotFoundError(
                 f"No mask files in output/{subfolder or 'masks'}. "
