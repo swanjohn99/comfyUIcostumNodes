@@ -36,7 +36,11 @@ def _iter_bbox_paths(directory: Path):
 
 def _list_bbox_files(subfolder: str = DEFAULT_SUBFOLDER) -> list[str]:
     d = _bboxes_dir(subfolder)
-    files = sorted(p.name for p in _iter_bbox_paths(d) if p.is_file())
+    files = sorted(
+        p.name
+        for p in _iter_bbox_paths(d)
+        if p.is_file() and _is_bbox_filename(p.name)
+    )
     return files if files else ["(none)"]
 
 
