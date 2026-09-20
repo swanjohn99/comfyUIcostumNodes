@@ -204,7 +204,9 @@ function bindNode(node) {
   if (!node) return;
   if (isVideoLoad(node)) wrapVideoWidget(node);
   const t = nodeType(node);
-  if (SAVE_TYPES.has(t) || t === LOAD_MASK || t === LOAD_H3) scheduleSync();
+  if (SAVE_TYPES.has(t) || t === LOAD_MASK || t === LOAD_H3 || t === LOAD_BBOX) {
+    scheduleSync();
+  }
 }
 
 app.registerExtension({
