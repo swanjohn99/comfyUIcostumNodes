@@ -187,6 +187,7 @@ async function syncAll() {
     const t = nodeType(node);
     if (t === LOAD_MASK) jobs.push(syncLoadNode(node, "mask"));
     else if (t === LOAD_H3) jobs.push(syncLoadNode(node, "h3"));
+    else if (t === LOAD_BBOX) jobs.push(syncLoadNode(node, "bbox"));
   }
   await Promise.all(jobs);
 }
