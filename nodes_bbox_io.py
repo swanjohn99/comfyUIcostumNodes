@@ -77,16 +77,17 @@ def _normalize_frame(frame) -> list[dict]:
     )
 
 
-def _extract_optional_meta(bboxes) -> dict:
+def _extract_optional_meta(obj) -> dict:
     meta = {}
-    if not isinstance(bboxes, dict):
+    if not isinstance(obj, dict) or _is_box_dict(obj):
         return meta
     for key in OPTIONAL_META_KEYS:
-        if key in bboxes and not _is_box_dict(bboxes):
-            try:
-                meta[key] = int(_num(bboxes[key]))
-            except (TypeError, ValueError):
-                continue
+        if key not in obj:
+            continue
+        try:
+            meta[key] = int(_num(obj[key]))
+        except (TypeError, ValueError):
+            continue
     return meta
 
 
@@ -97,11 +98,8 @@ def _normalize_bboxes(bboxes):
     """
     meta = _extract_optional_meta(bboxes)
     if isinstance(bboxes, dict) and "bboxes" in bboxes and not _is_box_dict(bboxes):
-        inner = bboxes["bboxes"]
-        meta.update(_extract_optional_meta(bboxes))
-        return _normalize_bboxes(inner)[0:2] + (
-            {**meta, **_extract_optional_meta(inner)},
-        )
+        payload, frame_count, inner_meta = _normalize_bboxes(bboxes["bboxes"])
+        return payload, frame_count, {**meta, **inner_meta}
 
     if _is_box_dict(bboxes):
         return _box_dict(bboxes), 1, meta
