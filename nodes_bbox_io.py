@@ -270,6 +270,22 @@ class LoadBoundingBoxes:
     CATEGORY = "bbox_io"
 
     @classmethod
+    def VALIDATE_INPUTS(cls, bbox_file, subfolder=DEFAULT_SUBFOLDER):
+        if not bbox_file or bbox_file == "(none)":
+            return f"No bbox files in output/{subfolder or DEFAULT_SUBFOLDER}."
+        if bbox_file.lower().endswith(".pt"):
+            return (
+                f"Rejected {bbox_file!r}: .pt is not supported "
+                f"(expected {BBOX_EXTENSION})"
+            )
+        if not _is_bbox_filename(bbox_file):
+            return f"Unsupported bbox file extension: {bbox_file!r} (expected {BBOX_EXTENSION})"
+        path = _bboxes_dir(subfolder) / bbox_file
+        if not path.is_file():
+            return f"BBox file not found: {path}"
+        return True
+
+    @classmethod
     def IS_CHANGED(cls, bbox_file, subfolder, **kwargs):
         if not bbox_file or bbox_file == "(none)":
             return float("nan")

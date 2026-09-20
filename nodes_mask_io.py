@@ -155,6 +155,22 @@ class LoadMaskTensor:
     CATEGORY = "mask_io"
 
     @classmethod
+    def VALIDATE_INPUTS(cls, mask_file, subfolder="masks"):
+        # Combo options come from INPUT_TYPES() default subfolder (masks/), not
+        # the prompt's subfolder. API sets masks/cropped etc. — skip combo check.
+        if not mask_file or mask_file == "(none)":
+            return f"No mask files in output/{subfolder or 'masks'}."
+        if not _is_mask_filename(mask_file):
+            return (
+                f"Unsupported mask file extension: {mask_file!r} "
+                f"(expected {MASK_EXTENSION} or legacy {LEGACY_MASK_EXTENSION})"
+            )
+        path = _masks_dir(subfolder) / mask_file
+        if not path.is_file():
+            return f"Mask file not found: {path}"
+        return True
+
+    @classmethod
     def IS_CHANGED(cls, mask_file, subfolder, **kwargs):
         if not mask_file or mask_file == "(none)":
             return float("nan")

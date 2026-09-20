@@ -209,6 +209,15 @@ class LoadH3AVLatent:
     CATEGORY = "h3_latent_io"
 
     @classmethod
+    def VALIDATE_INPUTS(cls, latent_file, subfolder=DEFAULT_SUBFOLDER):
+        if not latent_file or latent_file == "(none)":
+            return f"No .h3latent files in output/{subfolder or DEFAULT_SUBFOLDER}."
+        path = _latents_dir(subfolder) / latent_file
+        if not path.is_file():
+            return f"H3 latent file not found: {path}"
+        return True
+
+    @classmethod
     def IS_CHANGED(cls, latent_file, subfolder):
         if not latent_file or latent_file == "(none)":
             return float("nan")
