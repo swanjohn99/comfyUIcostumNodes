@@ -152,10 +152,6 @@ def _load_payload(path: Path):
         raise ValueError(f"Missing 'bboxes' in {path.name}")
 
     payload, frame_count, _meta = _normalize_bboxes(data["bboxes"])
-    declared = data.get("frame_count")
-    if declared is not None and int(declared) != frame_count and not _is_box_dict(payload):
-        # Prefer actual list length; still return normalized payload.
-        frame_count = len(payload) if isinstance(payload, list) else 1
     return payload, frame_count
 
 
