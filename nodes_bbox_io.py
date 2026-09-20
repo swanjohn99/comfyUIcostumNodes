@@ -27,11 +27,13 @@ def _bboxes_dir(subfolder: str = DEFAULT_SUBFOLDER) -> Path:
 
 
 def _is_bbox_filename(name: str) -> bool:
-    return bool(name) and name.lower().endswith(BBOX_EXTENSION)
+    return bool(name) and Path(name).suffix.lower() == BBOX_EXTENSION
 
 
 def _iter_bbox_paths(directory: Path):
-    yield from directory.glob(f"*{BBOX_EXTENSION}")
+    for path in directory.glob(f"*{BBOX_EXTENSION}"):
+        if _is_bbox_filename(path.name):
+            yield path
 
 
 def _list_bbox_files(subfolder: str = DEFAULT_SUBFOLDER) -> list[str]:
