@@ -204,5 +204,10 @@ class LoadMaskTensor:
             raise TypeError(f"Expected tensor in {path.name}, got {type(data)}")
 
         mask = _normalize_mask(data).cpu()
+        b = mask.shape[0]
+        if skip_first_frames >= b:
+            raise ValueError(f"skip_first_frames {skip_first_frames} >= {b} frames")
+        end = b if frame_load_cap <= 0 else min(b, skip_first_frames + frame_load_cap)
+        mask = mask[skip_first_frames:end:select_every_nth].contiguous()
         print(f"[mask_io] Loaded MASK {tuple(mask.shape)} <- {path}")
-        return (mask,)
+        return (mask, mask.shape[0])
