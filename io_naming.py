@@ -1,4 +1,4 @@
-"""Shared output naming for mask and H3 latent save nodes."""
+"""Shared output naming for mask, bbox, and H3 latent save nodes."""
 from __future__ import annotations
 
 import re

@@ -60,7 +60,7 @@ function mediaStem(filename) {
 
 function matchesStem(filename, stem) {
   if (!filename || !stem) return false;
-  const fileStem = String(filename).replace(/\.(cmask|pt|h3latent)$/i, "");
+  const fileStem = String(filename).replace(/\.(cmask|pt|h3latent|cbbox)$/i, "");
   return fileStem === stem || fileStem.startsWith(`${stem}_`);
 }
 
