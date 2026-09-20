@@ -117,6 +117,8 @@ def _normalize_bboxes(bboxes):
 def _slice_frames(frames: list, skip_first_frames: int, frame_load_cap: int, select_every_nth: int):
     n = len(frames)
     if skip_first_frames >= n:
+        if skip_first_frames == 0:
+            return []
         raise ValueError(f"skip_first_frames {skip_first_frames} >= {n} frames")
     end = n if frame_load_cap <= 0 else min(n, skip_first_frames + frame_load_cap)
     return frames[skip_first_frames:end:select_every_nth]
