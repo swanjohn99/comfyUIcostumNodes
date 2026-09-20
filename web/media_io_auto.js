@@ -162,8 +162,14 @@ async function syncLoadNode(node, kind) {
   const stem = mediaStem(video);
   if (!stem) return;
   const subfolder = widgetByName(node, "subfolder")?.value;
-  const widgetName = kind === "mask" ? "mask_file" : "latent_file";
-  const path = kind === "mask" ? "/mask_io/list" : "/h3_latent_io/list";
+  const widgetName =
+    kind === "mask" ? "mask_file" : kind === "bbox" ? "bbox_file" : "latent_file";
+  const path =
+    kind === "mask"
+      ? "/mask_io/list"
+      : kind === "bbox"
+        ? "/bbox_io/list"
+        : "/h3_latent_io/list";
   try {
     const data = await fetchFiles(path, subfolder);
     const current = String(widgetByName(node, widgetName)?.value || "");
