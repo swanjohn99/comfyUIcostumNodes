@@ -11,9 +11,15 @@ const VIDEO_LOAD_TYPES = new Set([
   "LoadVideoUpload",
 ]);
 const VIDEO_WIDGET_NAMES = ["video", "file", "video_path", "filename"];
-const SAVE_TYPES = new Set(["SaveMaskTensor", "SaveH3AVLatent", "BuildMediaIoBasename"]);
+const SAVE_TYPES = new Set([
+  "SaveMaskTensor",
+  "SaveH3AVLatent",
+  "SaveBoundingBoxes",
+  "BuildMediaIoBasename",
+]);
 const LOAD_MASK = "LoadMaskTensor";
 const LOAD_H3 = "LoadH3AVLatent";
+const LOAD_BBOX = "LoadBoundingBoxes";
 
 function nodeType(node) {
   return node?.comfyClass || node?.type || "";
